@@ -166,12 +166,9 @@
                 <img :src="subItem.cover"  class="product-image">
                 <div class="product-price">${{subItem.price}}</div>
                 <div class="buy-links">
-                    <a :href="subItem.cnfans" class="buy-link" target="_blank">cnfans</a>
-                    <a :href="subItem.cnfans" class="buy-link" target="_blank">购买链接1</a>
-                    <a :href="subItem.cnfans" class="buy-link" target="_blank">购买链接1</a>
-                    <a :href="subItem.cnfans" class="buy-link" target="_blank">购买链接1</a>
-                    <a :href="subItem.cnfans" class="buy-link" target="_blank">购买链接1</a>
-                    <a :href="subItem.cnfans" class="buy-link" target="_blank">allchinabuy</a>
+                    
+                    <a v-for="linkItem in purchaseLinks(subItem.pid)" :href="linkItem.link" class="buy-link" target="_blank">{{linkItem.name}}</a>
+                    
                 </div>
             </div>
         </div>
@@ -191,35 +188,68 @@ var app = new Vue({
         {
             category:"🧥Coats and Jackets🧥",
             plist:[
-                {cover:"./image/1.jpg" , price:80 , cnfans:"gogole.com"},
-                {cover:"./image/1.jpg" , price:80 , cnfans:"gogole.com"},
-                {cover:"./image/1.jpg" , price:80 , cnfans:"gogole.com"},
-                {cover:"./image/1.jpg" , price:80 , cnfans:"gogole.com"},
-                {cover:"./image/1.jpg" , price:80 , cnfans:"gogole.com"},
+                {cover:"./image/cover-114.png" , price:80 , pid:"7571117522"},
+                // {cover:"./image/1.jpg" , price:80 , pid:"7571117522"},
             ]
         },
-        {
-            category:"🥼Hoodies and Pants👖",
-            plist:[
-                {cover:"./image/1.jpg" , price:80 , cnfans:"gogole.com"},
-                {cover:"./image/1.jpg" , price:80 , cnfans:"gogole.com"},
-                {cover:"./image/1.jpg" , price:80 , cnfans:"gogole.com"},
-                {cover:"./image/1.jpg" , price:80 , cnfans:"gogole.com"},
-                {cover:"./image/1.jpg" , price:80 , cnfans:"gogole.com"},
-            ]
-        },
-        {
-            category:"👕T-shirt and Shorts🩳",
-            plist:[
-                {cover:"./image/1.jpg" , price:80 , cnfans:"gogole.com"},
-                {cover:"./image/1.jpg" , price:80 , cnfans:"gogole.com"},
-                {cover:"./image/1.jpg" , price:80 , cnfans:"gogole.com"},
-                {cover:"./image/1.jpg" , price:80 , cnfans:"gogole.com"},
-                {cover:"./image/1.jpg" , price:80 , cnfans:"gogole.com"},
-            ]
-        },
+        // {
+        //     category:"🥼Hoodies and Pants👖",
+        //     plist:[
+        //         {cover:"./image/1.jpg" , price:80 , cnfans:"gogole.com"},
+        //         {cover:"./image/1.jpg" , price:80 , cnfans:"gogole.com"},
+        //         {cover:"./image/1.jpg" , price:80 , cnfans:"gogole.com"},
+        //         {cover:"./image/1.jpg" , price:80 , cnfans:"gogole.com"},
+        //         {cover:"./image/1.jpg" , price:80 , cnfans:"gogole.com"},
+        //     ]
+        // },
+        // {
+        //     category:"👕T-shirt and Shorts🩳",
+        //     plist:[
+        //         {cover:"./image/1.jpg" , price:80 , cnfans:"gogole.com"},
+        //         {cover:"./image/1.jpg" , price:80 , cnfans:"gogole.com"},
+        //         {cover:"./image/1.jpg" , price:80 , cnfans:"gogole.com"},
+        //         {cover:"./image/1.jpg" , price:80 , cnfans:"gogole.com"},
+        //         {cover:"./image/1.jpg" , price:80 , cnfans:"gogole.com"},
+        //     ]
+        // },
     ]
-  }
+  },
+
+  methods: {
+        purchaseLinks:(itemId)=> {
+            console.log('itemId',itemId)
+                // 生成不同平台链接
+                
+                    // 解析URL
+                    const parsedUrl = new URL(`https://weidian.com/item.html?itemID=${itemId}`);
+                    
+                    // 重建URL
+                    let weidianUrl =  parsedUrl.toString();
+
+                    const itemID = new URL(weidianUrl).searchParams.get('itemID');
+                    if (!itemID) throw new Error('无法从 URL 提取 itemID');
+                    
+                    // URL 编码原始链接
+                    const encodedUrl = encodeURIComponent(weidianUrl);
+
+                    // 创建各平台链接
+                    let a=  [
+                        {name:'cnfans',link:`https://cnfans.com/product?id=${itemID}&platform=WEIDIAN`},
+                        {name:'hoobuy',link:`https://hoobuy.com/product/2/${itemID}` },
+                        {name:'oopbuy',link:`https://oopbuy.com/product/weidian/${itemID}` },
+                        {name:'mulebuy',link:`https://mulebuy.com/zh/product/?shop_type=weidian&id=${itemID}` },
+                        {name:'allchinabuy',link:`https://www.allchinabuy.com/en/page/buy/?nTag=Home-search&from=search-input&_search=url&position=&url=${encodedUrl}` },
+                        {name:'kakobuy',link:`https://www.kakobuy.com/item/details?url=${encodedUrl}` }
+                    ]
+
+                    console.log('a',a)
+                    return a
+            
+        }
+    }
+
+
+
 })
 </script>
 </body>
