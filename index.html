@@ -130,6 +130,9 @@
     .whatsapp-icon {
       background-color: #25D366; /* WhatsApp 品牌色 */
     }
+    .tiktok-icon {
+      background-color: #000000; /* TikTok 品牌色 */
+    }
     .social-icon:hover {
       transform: scale(1.1);
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
@@ -195,11 +198,14 @@
     </div>
   </div>
   <div class="social-icons">
-    <a href="https://t.me/+zQFcv5JPY-wxZTE1" class="social-icon telegram-icon" target="_blank" title="加入 Telegram">
+    <a href="https://t.me/+zQFcv5JPY-wxZTE1" class="social-icon telegram-icon" target="_blank" title="Join Telegram">
       <i class="fab fa-telegram-plane"></i>
     </a>
-    <a href="https://wa.me/your_whatsapp_number" class="social-icon whatsapp-icon" target="_blank" title="加入 WhatsApp">
+    <a href="https://wa.me/8617706270893" class="social-icon whatsapp-icon" target="_blank" title="Join WhatsApp">
       <i class="fab fa-whatsapp"></i>
+    </a>
+    <a href="https://www.tiktok.com/@qqww3968" class="social-icon tiktok-icon" target="_blank" title="Follow TikTok">
+      <i class="fab fa-tiktok"></i>
     </a>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
@@ -245,12 +251,12 @@
       },
       methods: {
         purchaseLinks(itemId) {
-         
+          
           const parsedUrl = new URL(`https://weidian.com/item.html?itemID=${itemId}`);
           const itemID = parsedUrl.searchParams.get('itemID');
           if (!itemID) throw new Error('无法从 URL 提取 itemID');
           const encodedUrl = encodeURIComponent(parsedUrl.toString());
-          return  [
+          return [
             {name: 'cnfans', link: `https://cnfans.com/product?id=${itemID}&platform=WEIDIAN`},
             {name: 'hoobuy', link: `https://hoobuy.com/product/2/${itemID}`},
             {name: 'oopbuy', link: `https://oopbuy.com/product/weidian/${itemID}`},
