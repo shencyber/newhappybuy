@@ -37,7 +37,7 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: flex-start;
-      gap: 20px;
+      gap: 16px; /* 卡片间距减小 */
       width: 100%;
     }
     .product-card {
@@ -47,8 +47,8 @@
       border-radius: 12px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
       overflow: hidden;
-      flex: 0 0 calc(16.666% - 20px);
-      max-width: calc(16.666% - 20px);
+      flex: 0 0 calc(20% - 16px); /* 宽度增加到5列 */
+      max-width: calc(20% - 16px);
       min-width: 160px;
       transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
@@ -72,10 +72,23 @@
     }
     .buy-links {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+      flex-wrap: wrap; /* 允许换行 */
+      justify-content: flex-start;
+      align-items: center; /* 垂直居中对齐 */
       padding: 8px 10px 15px;
-      gap: 6px 10px;
+      gap: 4px; /* 链接组间距 */
+    }
+    .buy-link-item {
+      display: flex;
+      align-items: center; /* 图标和链接垂直居中 */
+      gap: 2px; /* 图标和链接间距 */
+      width: calc(50% - 2px); /* 每行两个链接 */
+      margin-bottom: 4px; /* 行间距 */
+    }
+    .buy-link-icon {
+      width: 16px;
+      height: 16px;
+      border: 1px solid red; /* 保留红框 */
     }
     .buy-link {
       text-decoration: none;
@@ -85,6 +98,7 @@
       position: relative;
       transition: all 0.3s ease;
       letter-spacing: 0.2px;
+      border: 1px solid red; /* 保留红框 */
     }
     .buy-link::after {
       content: '';
@@ -139,8 +153,8 @@
     }
     @media (max-width: 1200px) {
       .product-card {
-        flex: 0 0 calc(25% - 20px);
-        max-width: calc(25% - 20px);
+        flex: 0 0 calc(33.333% - 16px); /* 3列 */
+        max-width: calc(33.333% - 16px);
       }
       .product-image {
         aspect-ratio: 1 / 1;
@@ -148,8 +162,8 @@
     }
     @media (max-width: 768px) {
       .product-card {
-        flex: 0 0 calc(33.333% - 20px);
-        max-width: calc(33.333% - 20px);
+        flex: 0 0 calc(50% - 16px); /* 2列 */
+        max-width: calc(50% - 16px);
       }
       .product-image {
         aspect-ratio: 1 / 1;
@@ -157,11 +171,11 @@
     }
     @media (max-width: 480px) {
       .product-container {
-        gap: 15px;
+        gap: 12px; /* 小屏幕间距进一步减小 */
       }
       .product-card {
-        flex: 0 0 calc(50% - 15px);
-        max-width: calc(50% - 15px);
+        flex: 0 0 calc(50% - 12px); /* 2列 */
+        max-width: calc(50% - 12px);
       }
       .product-image {
         aspect-ratio: 1 / 1;
@@ -179,6 +193,16 @@
         right: 15px;
         gap: 8px;
       }
+      .buy-links {
+        gap: 3px;
+      }
+      .buy-link-item {
+        width: 100%; /* 小屏幕每行一个链接 */
+        gap: 1px;
+      }
+      .buy-link {
+        font-size: 0.7em; /* 减小字体以适应小屏幕 */
+      }
     }
   </style>
 </head>
@@ -191,7 +215,10 @@
           <img :src="subItem.cover" class="product-image" loading="lazy" :alt="'产品图片 ' + subItem.pid">
           <div class="product-price">${{subItem.price}}</div>
           <div class="buy-links">
-            <a v-for="linkItem in purchaseLinks(subItem.pid)" :href="linkItem.link" class="buy-link" target="_blank">{{linkItem.name}}</a>
+            <span v-for="linkItem in purchaseLinks(subItem.pid)" class="buy-link-item">
+              <img :src="linkItem.icon" class="buy-link-icon" />
+              <a :href="linkItem.link" class="buy-link" target="_blank">{{linkItem.name}}</a>
+            </span>
           </div>
         </div>
       </div>
@@ -251,20 +278,18 @@
       },
       methods: {
         purchaseLinks(itemId) {
-          
           const parsedUrl = new URL(`https://weidian.com/item.html?itemID=${itemId}`);
           const itemID = parsedUrl.searchParams.get('itemID');
           if (!itemID) throw new Error('无法从 URL 提取 itemID');
           const encodedUrl = encodeURIComponent(parsedUrl.toString());
           return [
-            {name: 'cnfans', link: `https://cnfans.com/product?id=${itemID}&platform=WEIDIAN`},
-            {name: 'hoobuy', link: `https://hoobuy.com/product/2/${itemID}`},
-            {name: 'oopbuy', link: `https://oopbuy.com/product/weidian/${itemID}`},
-            {name: 'mulebuy', link: `https://mulebuy.com/zh/product/?shop_type=weidian&id=${itemID}`},
-            {name: 'allchinabuy', link: `https://www.allchinabuy.com/en/page/buy/?nTag=Home-search&from=search-input&_search=url&position=&url=${encodedUrl}`},
-            {name: 'kakobuy', link: `https://www.kakobuy.com/item/details?url=${encodedUrl}`}
+            {name: 'cnfans', icon: "./icon/cnfans.ico", link: `https://cnfans.com/product?id=${itemID}&platform=WEIDIAN`},
+            {name: 'hoobuy', icon: "./icon/hoo32.ico", link: `https://hoobuy.com/product/2/${itemID}`},
+            {name: 'oopbuy', icon: "./icon/oop.png", link: `https://oopbuy.com/product/weidian/${itemID}`},
+            {name: 'mulebuy', icon: "./icon/mulebuy.ico", link: `https://mulebuy.com/zh/product/?shop_type=weidian&id=${itemID}`},
+            {name: 'allchinabuy', icon: "./icon/chinabuy.ico", link: `https://www.allchinabuy.com/en/page/buy/?nTag=Home-search&from=search-input&_search=url&position=&url=${encodedUrl}`},
+            {name: 'kakobuy', icon: "./icon/kakobuy.png", link: `https://www.kakobuy.com/item/details?url=${encodedUrl}`}
           ];
-          
         }
       }
     });
