@@ -6,235 +6,260 @@
   <title>Newhappybuy</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  body {
-    font-family: 'Inter', sans-serif;
-    background-color: #f8f9fa;
-    min-height: 100vh;
-    padding: 40px 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .category-section {
-    width: 100%;
-    max-width: 1280px;
-    margin: 0 auto; /* 添加居中样式 */
-    margin-bottom: 40px;
-  }
-  .category-title {
-    font-size: 1.8em;
-    color: #2d3436;
-    text-align: center;
-    margin-bottom: 20px;
-    font-weight: 500;
-  }
-  .product-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start; /* 保持卡片左对齐，可选改为 center */
-    gap: 16px;
-    width: 100%;
-  }
-  .product-card {
-    display: flex;
-    flex-direction: column;
-    background-color: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-    overflow: hidden;
-    flex: 0 0 calc(18% - 16px);
-    max-width: calc(18% - 16px);
-    min-width: 160px;
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-  }
-  .product-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
-  }
-  .product-image {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    border-bottom: 1px solid #f1f1f1;
-  }
-  .product-price {
-    font-size: 1.2em;
-    color: #2d3436;
-    text-align: center;
-    padding: 15px 10px 5px;
-    font-weight: 500;
-    letter-spacing: 0.3px;
-  }
-  .buy-links {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 8px 10px 15px;
-    gap: 4px;
-  }
-  .buy-link-item {
-    display: flex;
-    align-items: center;
-    gap: 2px;
-    width: calc(50% - 2px);
-    margin-bottom: 4px;
-  }
-  .buy-link-icon {
-    width: 16px;
-    height: 16px;
-    border: 1px solid red;
-  }
-  .buy-link {
-    text-decoration: none;
-    color: #636e72;
-    font-size: 0.78em;
-    padding: 2px 4px;
-    position: relative;
-    transition: all 0.3s ease;
-    letter-spacing: 0.2px;
-    border: 1px solid red;
-  }
-  .buy-link::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 0.5px;
-    background-color: #636e72;
-    transition: width 0.3s ease;
-  }
-  .buy-link:hover {
-    color: #2d3436;
-  }
-  .buy-link:hover::after {
-    width: 100%;
-  }
-  .social-icons {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    z-index: 1000;
-  }
-  .social-icon {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    text-decoration: none;
-    color: #fff;
-    font-size: 24px;
-  }
-  .telegram-icon {
-    background-color: #0088cc;
-  }
-  .whatsapp-icon {
-    background-color: #25D366;
-  }
-  .tiktok-icon {
-    background-color: #000000;
-  }
-  .social-icon:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-  }
-  @media (max-width: 1200px) {
-    .product-card {
-      flex: 0 0 calc(25% - 16px);
-      max-width: calc(25% - 16px);
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    .product-image {
-      aspect-ratio: 1 / 1;
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f8f9fa;
+      min-height: 100vh;
+      margin: 0;
+      padding: 40px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
-  }
-  @media (max-width: 768px) {
-    .product-card {
-      flex: 0 0 calc(33.333% - 16px);
-      max-width: calc(33.333% - 16px);
+    #app {
+      border: 1px solid red;
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
-    .product-image {
-      aspect-ratio: 1 / 1;
-    }
-  }
-  @media (max-width: 480px) {
-    .product-container {
-      gap: 12px;
-    }
-    .product-card {
-      flex: 0 0 calc(50% - 12px);
-      max-width: calc(50% - 12px);
-    }
-    .product-image {
-      aspect-ratio: 1 / 1;
+    .category-section {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      margin-bottom: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     .category-title {
-      font-size: 1.5em;
+      font-size: 1.8em;
+      color: #2d3436;
+      text-align: center;
+      margin-bottom: 20px;
+      font-weight: 500;
     }
-    .social-icon {
-      width: 40px;
-      height: 40px;
-      font-size: 20px;
+    .product-container {
+      display: flex;
+      justify-content: center; /* 外层居中 */
+      width: 100%;
     }
-    .social-icons {
-      bottom: 15px;
-      right: 15px;
-      gap: 8px;
+    .product-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start; /* 卡片左对齐 */
+      gap: 16px;
+      width: 100%;
+      max-width: 1280px; /* 与外层一致 */
+    }
+    .product-card {
+      display: flex;
+      flex-direction: column;
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      flex: 0 0 calc(18% - 16px);
+      max-width: calc(18% - 16px);
+      min-width: 160px;
+      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+    }
+    .product-image {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-bottom: 1px solid #f1f1f1;
+    }
+    .product-price {
+      font-size: 1.2em;
+      color: #2d3436;
+      text-align: center;
+      padding: 15px 10px 5px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
     }
     .buy-links {
-      gap: 3px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 8px 10px 15px;
+      gap: 4px;
     }
     .buy-link-item {
-      width: calc(50% - 2px); /* 手机端每行两个链接 */
-      gap: 1px;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      width: calc(50% - 2px);
+      margin-bottom: 4px;
+    }
+    .buy-link-icon {
+      width: 16px;
+      height: 16px;
+      
     }
     .buy-link {
-      font-size: 0.7em;
+      text-decoration: none;
+      color: #636e72;
+      font-size: 0.78em;
+      padding: 2px 4px;
+      position: relative;
+      transition: all 0.3s ease;
+      letter-spacing: 0.2px;
+      
     }
-  }
-</style>
+    .buy-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 0.5px;
+      background-color: #636e72;
+      transition: width 0.3s ease;
+    }
+    .buy-link:hover {
+      color: #2d3436;
+    }
+    .buy-link:hover::after {
+      width: 100%;
+    }
+    .social-icons {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 1000;
+    }
+    .social-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+      color: #fff;
+      font-size: 24px;
+    }
+    .telegram-icon {
+      background-color: #0088cc;
+    }
+    .whatsapp-icon {
+      background-color: #25D366;
+    }
+    .tiktok-icon {
+      background-color: #000000;
+    }
+    .social-icon:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    }
+    @media (max-width: 1200px) {
+      .product-card {
+        flex: 0 0 calc(25% - 16px);
+        max-width: calc(25% - 16px);
+      }
+      .product-image {
+        aspect-ratio: 1 / 1;
+      }
+    }
+    @media (max-width: 768px) {
+      .product-card {
+        flex: 0 0 calc(33.333% - 16px);
+        max-width: calc(33.333% - 16px);
+      }
+      .product-image {
+        aspect-ratio: 1 / 1;
+      }
+    }
+    @media (max-width: 480px) {
+      .product-container {
+        gap: 12px;
+      }
+      .product-inner {
+        gap: 12px;
+      }
+      .product-card {
+        flex: 0 0 calc(50% - 12px);
+        max-width: calc(50% - 12px);
+      }
+      .product-image {
+        aspect-ratio: 1 / 1;
+      }
+      .category-title {
+        font-size: 1.5em;
+      }
+      .social-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+      }
+      .social-icons {
+        bottom: 15px;
+        right: 15px;
+        gap: 8px;
+      }
+      .buy-links {
+        gap: 3px;
+      }
+      .buy-link-item {
+        width: calc(50% - 2px);
+        gap: 1px;
+      }
+      .buy-link {
+        font-size: 0.7em;
+      }
+    }
+  </style>
 </head>
 <body>
   <div id="app">
     <div v-for="item in list" class="category-section">
       <h2 class="category-title">{{item.category}}</h2>
       <div class="product-container">
-        <div v-for="subItem in item.plist" class="product-card">
-          <img :src="subItem.cover" class="product-image" loading="lazy" :alt="'产品图片 ' + subItem.pid">
-          <div class="product-price">${{subItem.price}}</div>
-          <div class="buy-links">
-            <span v-for="linkItem in purchaseLinks(subItem.pid)" class="buy-link-item">
-              <img :src="linkItem.icon" class="buy-link-icon" />
-              <a :href="linkItem.link" class="buy-link" target="_blank">{{linkItem.name}}</a>
-            </span>
+        <div class="product-inner">
+          <div v-for="subItem in item.plist" class="product-card">
+            <img :src="subItem.cover" class="product-image" loading="lazy" :alt="'产品图片 ' + subItem.pid">
+            <div class="product-price">${{subItem.price}}</div>
+            <div class="buy-links">
+              <span v-for="linkItem in purchaseLinks(subItem.pid)" class="buy-link-item">
+                <img :src="linkItem.icon" class="buy-link-icon" />
+                <a :href="linkItem.link" class="buy-link" target="_blank">{{linkItem.name}}</a>
+              </span>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="social-icons">
-    <a href="https://t.me/+zQFcv5JPY-wxZTE1" class="social-icon telegram-icon" target="_blank" title="Join Telegram">
-      <i class="fab fa-telegram-plane"></i>
-    </a>
-    <a href="https://wa.me/8617706270893" class="social-icon whatsapp-icon" target="_blank" title="Join WhatsApp">
-      <i class="fab fa-whatsapp"></i>
-    </a>
-    <a href="https://www.tiktok.com/@qqww3968" class="social-icon tiktok-icon" target="_blank" title="Follow TikTok">
-      <i class="fab fa-tiktok"></i>
-    </a>
+    <div class="social-icons">
+      <a href="https://t.me/+zQFcv5JPY-wxZTE1" class="social-icon telegram-icon" target="_blank" title="Join Telegram">
+        <i class="fab fa-telegram-plane"></i>
+      </a>
+      <a href="https://wa.me/8617706270893" class="social-icon whatsapp-icon" target="_blank" title="Join WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+      </a>
+      <a href="https://www.tiktok.com/@qqww3968" class="social-icon tiktok-icon" target="_blank" title="Follow TikTok">
+        <i class="fab fa-tiktok"></i>
+      </a>
+    </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
   <script>
