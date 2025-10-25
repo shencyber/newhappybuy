@@ -163,7 +163,7 @@
         <h2 class="category-title">{{item.category}}</h2>
         <div class="product-container">
             <div v-for="subItem in item.plist" class="product-card">
-                <img :src='subItem.cover'  class="product-image">
+                <img :src='subItem.cover' loading="lazy"  class="product-image">
                 <div class="product-price">${{subItem.price}}</div>
                 <div class="buy-links">
                     
