@@ -25,7 +25,7 @@
         .product-container {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
+            justify-content: flex-start; /* 从左对齐排列 */
             gap: 20px; /* 卡片间距 */
             width: 100%;
             max-width: 1280px; /* 优化容器宽度，适配6个卡片 */
@@ -38,7 +38,7 @@
             border-radius: 12px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
             overflow: hidden;
-            flex: 1 1 calc(16.666% - 20px); /* 每行6个，减去间距 */
+            flex: 0 0 calc(16.666% - 20px); /* 每行6个，减去间距 */
             max-width: calc(16.666% - 20px); /* 每行6个卡片的最大宽度 */
             min-width: 160px; /* 确保卡片不过于狭窄 */
             transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -106,7 +106,7 @@
         @media (max-width: 1200px) {
             /* 中等屏幕每行4个 */
             .product-card {
-                flex: 1 1 calc(25% - 20px);
+                flex: 0 0 calc(25% - 20px);
                 max-width: calc(25% - 20px);
             }
             .product-image {
@@ -117,7 +117,7 @@
         @media (max-width: 768px) {
             /* 平板每行3个 */
             .product-card {
-                flex: 1 1 calc(33.333% - 20px);
+                flex: 0 0 calc(33.333% - 20px);
                 max-width: calc(33.333% - 20px);
             }
             .product-image {
@@ -131,7 +131,7 @@
                 gap: 15px;
             }
             .product-card {
-                flex: 1 1 calc(50% - 15px);
+                flex: 0 0 calc(50% - 15px);
                 max-width: calc(50% - 15px);
             }
             .product-image {
@@ -155,7 +155,6 @@
                 <a href="https://www.google.com" class="buy-link" target="_blank">allchinabuy</a>
             </div>
         </div>
-        <!-- 其他卡片保持不变 -->
         <div class="product-card">
             <img src="./image/1.jpg" alt="商品1" class="product-image">
             <div class="product-price">$299.00</div>
