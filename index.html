@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>多商品卡片展示</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+    
     <style>
         * {
             margin: 0;
@@ -14,33 +15,35 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f8f9fa;
+            background-color: #f9f5f0; /* Softer ivory background for luxury feel */
             min-height: 100vh;
-            padding: 40px 20px;
+            padding: 60px 20px; /* Increased padding for spaciousness */
             display: flex;
-            flex-direction: column; /* 改为垂直布局 */
-            align-items: center; /* 水平居中，确保分类容器居中 */
+            flex-direction: column;
+            align-items: center;
         }
 
         .category-section {
             width: 100%;
-            max-width: 1280px; /* 与 product-container 一致 */
-            margin-bottom: 40px; /* 组与组之间的间距 */
+            max-width: 1280px;
+            margin-bottom: 60px; /* More space between sections */
         }
 
         .category-title {
-            font-size: 1.8em;
-            color: #2d3436;
+            font-family: 'Playfair Display', serif; /* Elegant serif font for titles */
+            font-size: 2.2em; /* Larger for prominence */
+            color: #1a1a1a; /* Deep charcoal for sophistication */
             text-align: center;
-            margin-bottom: 20px; /* 标题与卡片之间的间距 */
-            font-weight: 500;
+            margin-bottom: 30px;
+            font-weight: 400; /* Lighter weight for elegance */
+            letter-spacing: 1px;
         }
 
         .product-container {
             display: flex;
             flex-wrap: wrap;
-            justify-content: flex-start; /* 从左对齐排列 */
-            gap: 20px; /* 卡片间距 */
+            justify-content: flex-start;
+            gap: 30px; /* Increased gap for a cleaner look */
             width: 100%;
         }
 
@@ -48,52 +51,67 @@
             display: flex;
             flex-direction: column;
             background-color: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            border-radius: 8px; /* Slightly smaller radius for subtlety */
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.03); /* Softer shadow */
             overflow: hidden;
-            flex: 0 0 calc(16.666% - 20px); /* 每行6个，减去间距 */
-            max-width: calc(16.666% - 20px); /* 每行6个卡片的最大宽度 */
-            min-width: 160px; /* 确保卡片不过于狭窄 */
-            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            flex: 0 0 calc(16.666% - 30px);
+            max-width: calc(16.666% - 30px);
+            min-width: 160px;
+            transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.5s;
         }
 
         .product-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+            transform: translateY(-4px); /* Subtler lift effect */
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
         }
 
         .product-image {
             width: 100%;
-            height: 160px;
+            height: 180px; /* Slightly taller for better image display */
             object-fit: cover;
-            border-bottom: 1px solid #f1f1f1;
+            border-bottom: 1px solid #f4f4f4;
         }
 
         .product-price {
-            font-size: 1.2em;
-            color: #2d3436;
+            font-family: 'Playfair Display', serif; /* Serif font for luxury */
+            font-size: 1.4em; /* Larger for emphasis */
+            color: #1a1a1a; /* Deep charcoal */
             text-align: center;
-            padding: 15px 10px 5px;
-            font-weight: 500;
-            letter-spacing: 0.3px;
+            padding: 20px 10px 10px; /* More padding for breathing room */
+            font-weight: 400; /* Lighter weight for elegance */
+            letter-spacing: 0.5px;
+        }
+
+        .product-price::before {
+            content: '$'; /* Explicit currency symbol */
+            font-size: 0.9em; /* Slightly smaller for hierarchy */
+            margin-right: 2px;
+        }
+
+        .product-price::after {
+            content: '.00'; /* Add cents for luxury pricing */
+            font-size: 0.7em; /* Smaller for subtlety */
+            vertical-align: baseline;
         }
 
         .buy-links {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            padding: 8px 10px 15px;
-            gap: 6px 10px;
+            padding: 10px 10px 20px;
+            gap: 8px 12px; /* Slightly larger gaps */
         }
 
         .buy-link {
             text-decoration: none;
-            color: #636e72;
-            font-size: 0.78em;
-            padding: 2px 4px;
+            color: #4a4a4a; /* Muted gray for sophistication */
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8em;
+            padding: 3px 6px;
             position: relative;
-            transition: all 0.3s ease;
-            letter-spacing: 0.2px;
+            transition: color 0.3s ease;
+            letter-spacing: 0.5px;
+            text-transform: uppercase; /* Uppercase for luxury branding */
         }
 
         .buy-link::after {
@@ -102,241 +120,131 @@
             bottom: 0;
             left: 0;
             width: 0;
-            height: 0.5px;
-            background-color: #636e72;
+            height: 1px; /* Thinner underline */
+            background-color: #b7a57a; /* Subtle gold accent */
             transition: width 0.3s ease;
         }
 
         .buy-link:hover {
-            color: #2d3436;
+            color: #b7a57a; /* Gold on hover */
         }
 
         .buy-link:hover::after {
             width: 100%;
         }
 
-        /* 响应式优化 */
+        /* Responsive adjustments */
         @media (max-width: 1200px) {
-            /* 中等屏幕每行4个 */
             .product-card {
-                flex: 0 0 calc(25% - 20px);
-                max-width: calc(25% - 20px);
+                flex: 0 0 calc(25% - 30px);
+                max-width: calc(25% - 30px);
             }
             .product-image {
-                height: 180px;
+                height: 200px;
+            }
+            .product-price {
+                font-size: 1.3em;
             }
         }
 
         @media (max-width: 768px) {
-            /* 平板每行3个 */
             .product-card {
-                flex: 0 0 calc(33.333% - 20px);
-                max-width: calc(33.333% - 20px);
+                flex: 0 0 calc(33.333% - 30px);
+                max-width: calc(33.333% - 30px);
             }
             .product-image {
-                height: 160px;
+                height: 180px;
+            }
+            .product-price {
+                font-size: 1.2em;
+            }
+            .category-title {
+                font-size: 1.8em;
             }
         }
 
         @media (max-width: 480px) {
-            /* 手机每行2个 */
             .product-container {
-                gap: 15px;
+                gap: 20px;
             }
             .product-card {
-                flex: 0 0 calc(50% - 15px);
-                max-width: calc(50% - 15px);
+                flex: 0 0 calc(50% - 20px);
+                max-width: calc(50% - 20px);
             }
             .product-image {
-                height: 140px;
+                height: 160px;
+            }
+            .product-price {
+                font-size: 1.1em;
             }
             .category-title {
-                font-size: 1.5em;
+                font-size: 1.6em;
+            }
+            .buy-link {
+                font-size: 0.75em;
             }
         }
     </style>
 </head>
 <body>
-    <div class="category-section">
-        <h2 class="category-title">👕T-shirt and Shorts🩳</h2>
+<div id="app">
+    <div v-for="item in list" class="category-section">
+        <h2 class="category-title">{{item.category}}</h2>
         <div class="product-container">
-            <!-- 商品卡片 1 -->
-            <div class="product-card">
-                <img src="./image/1.jpg" alt="商品1" class="product-image">
-                <div class="product-price">$299.00</div>
+            <div v-for="subItem in item.plist" class="product-card">
+                <img :src="subItem.cover" class="product-image">
+                <div class="product-price">{{subItem.price}}</div>
                 <div class="buy-links">
-                    <a href="https://www.google.com" class="buy-link" target="_blank">cnfans</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">allchinabuy</a>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="./image/1.jpg" alt="商品1" class="product-image">
-                <div class="product-price">$299.00</div>
-                <div class="buy-links">
-                    <a href="https://www.google.com" class="buy-link" target="_blank">cnfans</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">allchinabuy</a>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="./image/1.jpg" alt="商品1" class="product-image">
-                <div class="product-price">$299.00</div>
-                <div class="buy-links">
-                    <a href="https://www.google.com" class="buy-link" target="_blank">cnfans</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">allchinabuy</a>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="./image/1.jpg" alt="商品1" class="product-image">
-                <div class="product-price">$299.00</div>
-                <div class="buy-links">
-                    <a href="https://www.google.com" class="buy-link" target="_blank">cnfans</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">allchinabuy</a>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="./image/1.jpg" alt="商品1" class="product-image">
-                <div class="product-price">$299.00</div>
-                <div class="buy-links">
-                    <a href="https://www.google.com" class="buy-link" target="_blank">cnfans</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">allchinabuy</a>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="./image/1.jpg" alt="商品1" class="product-image">
-                <div class="product-price">$299.00</div>
-                <div class="buy-links">
-                    <a href="https://www.google.com" class="buy-link" target="_blank">cnfans</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">allchinabuy</a>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="./image/1.jpg" alt="商品1" class="product-image">
-                <div class="product-price">$299.00</div>
-                <div class="buy-links">
-                    <a href="https://www.google.com" class="buy-link" target="_blank">cnfans</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">allchinabuy</a>
+                    <a :href="subItem.cnfans" class="buy-link" target="_blank">CNFANS</a>
+                    <a :href="subItem.cnfans" class="buy-link" target="_blank">PURCHASE LINK 1</a>
+                    <a :href="subItem.cnfans" class="buy-link" target="_blank">PURCHASE LINK 2</a>
+                    <a :href="subItem.cnfans" class="buy-link" target="_blank">PURCHASE LINK 3</a>
+                    <a :href="subItem.cnfans" class="buy-link" target="_blank">PURCHASE LINK 4</a>
+                    <a :href="subItem.cnfans" class="buy-link" target="_blank">ALLCHINABUY</a>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="category-section">
-        <h2 class="category-title">🥼Hoodies and Pants👖</h2>
-        <div class="product-container">
-            <!-- 商品卡片 1 -->
-            <div class="product-card">
-                <img src="./image/1.jpg" alt="商品1" class="product-image">
-                <div class="product-price">$299.00</div>
-                <div class="buy-links">
-                    <a href="https://www.google.com" class="buy-link" target="_blank">cnfans</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">allchinabuy</a>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="./image/1.jpg" alt="商品1" class="product-image">
-                <div class="product-price">$299.00</div>
-                <div class="buy-links">
-                    <a href="https://www.google.com" class="buy-link" target="_blank">cnfans</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">allchinabuy</a>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="./image/1.jpg" alt="商品1" class="product-image">
-                <div class="product-price">$299.00</div>
-                <div class="buy-links">
-                    <a href="https://www.google.com" class="buy-link" target="_blank">cnfans</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">allchinabuy</a>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="./image/1.jpg" alt="商品1" class="product-image">
-                <div class="product-price">$299.00</div>
-                <div class="buy-links">
-                    <a href="https://www.google.com" class="buy-link" target="_blank">cnfans</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">allchinabuy</a>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="./image/1.jpg" alt="商品1" class="product-image">
-                <div class="product-price">$299.00</div>
-                <div class="buy-links">
-                    <a href="https://www.google.com" class="buy-link" target="_blank">cnfans</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">allchinabuy</a>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="./image/1.jpg" alt="商品1" class="product-image">
-                <div class="product-price">$299.00</div>
-                <div class="buy-links">
-                    <a href="https://www.google.com" class="buy-link" target="_blank">cnfans</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">allchinabuy</a>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="./image/1.jpg" alt="商品1" class="product-image">
-                <div class="product-price">$299.00</div>
-                <div class="buy-links">
-                    <a href="https://www.google.com" class="buy-link" target="_blank">cnfans</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                    <a href="https://www.google.com" class="buy-link" target="_blank">allchinabuy</a>
-                </div>
-            </div>
-        </div>
-    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<script>
+var app = new Vue({
+  el: '#app',
+  data: {
+    list: [
+        {
+            category: "🧥 Coats and Jackets 🧥",
+            plist: [
+                {cover: "./image/1.jpg", price: 1200, cnfans: "gogole.com"},
+                {cover: "./image/1.jpg", price: 1350, cnfans: "gogole.com"},
+                {cover: "./image/1.jpg", price: 980, cnfans: "gogole.com"},
+                {cover: "./image/1.jpg", price: 1500, cnfans: "gogole.com"},
+                {cover: "./image/1.jpg", price: 1100, cnfans: "gogole.com"},
+            ]
+        },
+        {
+            category: "🥼 Hoodies and Pants 👖",
+            plist: [
+                {cover: "./image/1.jpg", price: 850, cnfans: "gogole.com"},
+                {cover: "./image/1.jpg", price: 900, cnfans: "gogole.com"},
+                {cover: "./image/1.jpg", price: 780, cnfans: "gogole.com"},
+                {cover: "./image/1.jpg", price: 950, cnfans: "gogole.com"},
+                {cover: "./image/1.jpg", price: 820, cnfans: "gogole.com"},
+            ]
+        },
+        {
+            category: "👕 T-shirt and Shorts 🩳",
+            plist: [
+                {cover: "./image/1.jpg", price: 450, cnfans: "gogole.com"},
+                {cover: "./image/1.jpg", price: 500, cnfans: "gogole.com"},
+                {cover: "./image/1.jpg", price: 420, cnfans: "gogole.com"},
+                {cover: "./image/1.jpg", price: 480, cnfans: "gogole.com"},
+                {cover: "./image/1.jpg", price: 510, cnfans: "gogole.com"},
+            ]
+        },
+    ]
+  }
+})
+</script>
 </body>
 </html>
