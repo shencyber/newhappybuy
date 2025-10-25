@@ -18,8 +18,22 @@
             min-height: 100vh;
             padding: 40px 20px;
             display: flex;
-            justify-content: center;
-            align-items: flex-start;
+            flex-direction: column; /* 改为垂直布局 */
+            align-items: center; /* 水平居中，确保分类容器居中 */
+        }
+
+        .category-section {
+            width: 100%;
+            max-width: 1280px; /* 与 product-container 一致 */
+            margin-bottom: 40px; /* 组与组之间的间距 */
+        }
+
+        .category-title {
+            font-size: 1.8em;
+            color: #2d3436;
+            text-align: center;
+            margin-bottom: 20px; /* 标题与卡片之间的间距 */
+            font-weight: 500;
         }
 
         .product-container {
@@ -28,7 +42,6 @@
             justify-content: flex-start; /* 从左对齐排列 */
             gap: 20px; /* 卡片间距 */
             width: 100%;
-            max-width: 1280px; /* 优化容器宽度，适配6个卡片 */
         }
 
         .product-card {
@@ -137,94 +150,191 @@
             .product-image {
                 height: 140px;
             }
+            .category-title {
+                font-size: 1.5em;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="product-container">
-        <!-- 商品卡片 1 -->
-        <div class="product-card">
-            <img src="./image/1.jpg" alt="商品1" class="product-image">
-            <div class="product-price">$299.00</div>
-            <div class="buy-links">
-                <a href="https://www.google.com" class="buy-link" target="_blank">cnfans</a>
-                <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                <a href="https://www.google.com" class="buy-link" target="_blank">allchinabuy</a>
+    <div class="category-section">
+        <h2 class="category-title">👕T-shirt and Shorts🩳</h2>
+        <div class="product-container">
+            <!-- 商品卡片 1 -->
+            <div class="product-card">
+                <img src="./image/1.jpg" alt="商品1" class="product-image">
+                <div class="product-price">$299.00</div>
+                <div class="buy-links">
+                    <a href="https://www.google.com" class="buy-link" target="_blank">cnfans</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">allchinabuy</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="./image/1.jpg" alt="商品1" class="product-image">
+                <div class="product-price">$299.00</div>
+                <div class="buy-links">
+                    <a href="https://www.google.com" class="buy-link" target="_blank">cnfans</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">allchinabuy</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="./image/1.jpg" alt="商品1" class="product-image">
+                <div class="product-price">$299.00</div>
+                <div class="buy-links">
+                    <a href="https://www.google.com" class="buy-link" target="_blank">cnfans</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">allchinabuy</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="./image/1.jpg" alt="商品1" class="product-image">
+                <div class="product-price">$299.00</div>
+                <div class="buy-links">
+                    <a href="https://www.google.com" class="buy-link" target="_blank">cnfans</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">allchinabuy</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="./image/1.jpg" alt="商品1" class="product-image">
+                <div class="product-price">$299.00</div>
+                <div class="buy-links">
+                    <a href="https://www.google.com" class="buy-link" target="_blank">cnfans</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">allchinabuy</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="./image/1.jpg" alt="商品1" class="product-image">
+                <div class="product-price">$299.00</div>
+                <div class="buy-links">
+                    <a href="https://www.google.com" class="buy-link" target="_blank">cnfans</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">allchinabuy</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="./image/1.jpg" alt="商品1" class="product-image">
+                <div class="product-price">$299.00</div>
+                <div class="buy-links">
+                    <a href="https://www.google.com" class="buy-link" target="_blank">cnfans</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">allchinabuy</a>
+                </div>
             </div>
         </div>
-        <div class="product-card">
-            <img src="./image/1.jpg" alt="商品1" class="product-image">
-            <div class="product-price">$299.00</div>
-            <div class="buy-links">
-                <a href="https://www.google.com" class="buy-link" target="_blank">cnfans</a>
-                <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                <a href="https://www.google.com" class="buy-link" target="_blank">allchinabuy</a>
+    </div>
+
+    <div class="category-section">
+        <h2 class="category-title">🥼Hoodies and Pants👖</h2>
+        <div class="product-container">
+            <!-- 商品卡片 1 -->
+            <div class="product-card">
+                <img src="./image/1.jpg" alt="商品1" class="product-image">
+                <div class="product-price">$299.00</div>
+                <div class="buy-links">
+                    <a href="https://www.google.com" class="buy-link" target="_blank">cnfans</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">allchinabuy</a>
+                </div>
             </div>
-        </div>
-        <div class="product-card">
-            <img src="./image/1.jpg" alt="商品1" class="product-image">
-            <div class="product-price">$299.00</div>
-            <div class="buy-links">
-                <a href="https://www.google.com" class="buy-link" target="_blank">cnfans</a>
-                <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                <a href="https://www.google.com" class="buy-link" target="_blank">allchinabuy</a>
+            <div class="product-card">
+                <img src="./image/1.jpg" alt="商品1" class="product-image">
+                <div class="product-price">$299.00</div>
+                <div class="buy-links">
+                    <a href="https://www.google.com" class="buy-link" target="_blank">cnfans</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">allchinabuy</a>
+                </div>
             </div>
-        </div>
-        <div class="product-card">
-            <img src="./image/1.jpg" alt="商品1" class="product-image">
-            <div class="product-price">$299.00</div>
-            <div class="buy-links">
-                <a href="https://www.google.com" class="buy-link" target="_blank">cnfans</a>
-                <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                <a href="https://www.google.com" class="buy-link" target="_blank">allchinabuy</a>
+            <div class="product-card">
+                <img src="./image/1.jpg" alt="商品1" class="product-image">
+                <div class="product-price">$299.00</div>
+                <div class="buy-links">
+                    <a href="https://www.google.com" class="buy-link" target="_blank">cnfans</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">allchinabuy</a>
+                </div>
             </div>
-        </div>
-        <div class="product-card">
-            <img src="./image/1.jpg" alt="商品1" class="product-image">
-            <div class="product-price">$299.00</div>
-            <div class="buy-links">
-                <a href="https://www.google.com" class="buy-link" target="_blank">cnfans</a>
-                <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                <a href="https://www.google.com" class="buy-link" target="_blank">allchinabuy</a>
+            <div class="product-card">
+                <img src="./image/1.jpg" alt="商品1" class="product-image">
+                <div class="product-price">$299.00</div>
+                <div class="buy-links">
+                    <a href="https://www.google.com" class="buy-link" target="_blank">cnfans</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">allchinabuy</a>
+                </div>
             </div>
-        </div>
-        <div class="product-card">
-            <img src="./image/1.jpg" alt="商品1" class="product-image">
-            <div class="product-price">$299.00</div>
-            <div class="buy-links">
-                <a href="https://www.google.com" class="buy-link" target="_blank">cnfans</a>
-                <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                <a href="https://www.google.com" class="buy-link" target="_blank">allchinabuy</a>
+            <div class="product-card">
+                <img src="./image/1.jpg" alt="商品1" class="product-image">
+                <div class="product-price">$299.00</div>
+                <div class="buy-links">
+                    <a href="https://www.google.com" class="buy-link" target="_blank">cnfans</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">allchinabuy</a>
+                </div>
             </div>
-        </div>
-        <div class="product-card">
-            <img src="./image/1.jpg" alt="商品1" class="product-image">
-            <div class="product-price">$299.00</div>
-            <div class="buy-links">
-                <a href="https://www.google.com" class="buy-link" target="_blank">cnfans</a>
-                <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
-                <a href="https://www.google.com" class="buy-link" target="_blank">allchinabuy</a>
+            <div class="product-card">
+                <img src="./image/1.jpg" alt="商品1" class="product-image">
+                <div class="product-price">$299.00</div>
+                <div class="buy-links">
+                    <a href="https://www.google.com" class="buy-link" target="_blank">cnfans</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">allchinabuy</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="./image/1.jpg" alt="商品1" class="product-image">
+                <div class="product-price">$299.00</div>
+                <div class="buy-links">
+                    <a href="https://www.google.com" class="buy-link" target="_blank">cnfans</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">购买链接1</a>
+                    <a href="https://www.google.com" class="buy-link" target="_blank">allchinabuy</a>
+                </div>
             </div>
         </div>
     </div>
