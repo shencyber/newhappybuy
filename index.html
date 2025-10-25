@@ -1,247 +1,235 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Newhappybuy</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8f9fa;
-            min-height: 100vh;
-            padding: 40px 20px;
-            display: flex;
-            flex-direction: column; /* 改为垂直布局 */
-            align-items: center; /* 水平居中，确保分类容器居中 */
-        }
-
-        .category-section {
-            width: 100%;
-            max-width: 1280px; /* 与 product-container 一致 */
-            margin-bottom: 40px; /* 组与组之间的间距 */
-        }
-
-        .category-title {
-            font-size: 1.8em;
-            color: #2d3436;
-            text-align: center;
-            margin-bottom: 20px; /* 标题与卡片之间的间距 */
-            font-weight: 500;
-        }
-
-        .product-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: flex-start; /* 从左对齐排列 */
-            gap: 20px; /* 卡片间距 */
-            width: 100%;
-        }
-
-        .product-card {
-            display: flex;
-            flex-direction: column;
-            background-color: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            overflow: hidden;
-            flex: 0 0 calc(16.666% - 20px); /* 每行6个，减去间距 */
-            max-width: calc(16.666% - 20px); /* 每行6个卡片的最大宽度 */
-            min-width: 160px; /* 确保卡片不过于狭窄 */
-            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
-
-        .product-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
-        }
-
-        .product-image {
-            width: 100%;
-            height: 160px;
-            object-fit: cover;
-            border-bottom: 1px solid #f1f1f1;
-        }
-
-        .product-price {
-            font-size: 1.2em;
-            color: #2d3436;
-            text-align: center;
-            padding: 15px 10px 5px;
-            font-weight: 500;
-            letter-spacing: 0.3px;
-        }
-
-        .buy-links {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            padding: 8px 10px 15px;
-            gap: 6px 10px;
-        }
-
-        .buy-link {
-            text-decoration: none;
-            color: #636e72;
-            font-size: 0.78em;
-            padding: 2px 4px;
-            position: relative;
-            transition: all 0.3s ease;
-            letter-spacing: 0.2px;
-        }
-
-        .buy-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 0.5px;
-            background-color: #636e72;
-            transition: width 0.3s ease;
-        }
-
-        .buy-link:hover {
-            color: #2d3436;
-        }
-
-        .buy-link:hover::after {
-            width: 100%;
-        }
-
-        /* 响应式优化 */
-        @media (max-width: 1200px) {
-            /* 中等屏幕每行4个 */
-            .product-card {
-                flex: 0 0 calc(25% - 20px);
-                max-width: calc(25% - 20px);
-            }
-            .product-image {
-                height: 180px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            /* 平板每行3个 */
-            .product-card {
-                flex: 0 0 calc(33.333% - 20px);
-                max-width: calc(33.333% - 20px);
-            }
-            .product-image {
-                height: 160px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            /* 手机每行2个 */
-            .product-container {
-                gap: 15px;
-            }
-            .product-card {
-                flex: 0 0 calc(50% - 15px);
-                max-width: calc(50% - 15px);
-            }
-            .product-image {
-                height: 140px;
-            }
-            .category-title {
-                font-size: 1.5em;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Newhappybuy</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f8f9fa;
+      min-height: 100vh;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .category-section {
+      width: 100%;
+      max-width: 1280px;
+      margin-bottom: 40px;
+    }
+    .category-title {
+      font-size: 1.8em;
+      color: #2d3436;
+      text-align: center;
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+    .product-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      gap: 20px;
+      width: 100%;
+    }
+    .product-card {
+      display: flex;
+      flex-direction: column;
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      flex: 0 0 calc(16.666% - 20px);
+      max-width: calc(16.666% - 20px);
+      min-width: 160px;
+      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+    }
+    .product-image {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-bottom: 1px solid #f1f1f1;
+    }
+    .product-price {
+      font-size: 1.2em;
+      color: #2d3436;
+      text-align: center;
+      padding: 15px 10px 5px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
+    .buy-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 8px 10px 15px;
+      gap: 6px 10px;
+    }
+    .buy-link {
+      text-decoration: none;
+      color: #636e72;
+      font-size: 0.78em;
+      padding: 2px 4px;
+      position: relative;
+      transition: all 0.3s ease;
+      letter-spacing: 0.2px;
+    }
+    .buy-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 0.5px;
+      background-color: #636e72;
+      transition: width 0.3s ease;
+    }
+    .buy-link:hover {
+      color: #2d3436;
+    }
+    .buy-link:hover::after {
+      width: 100%;
+    }
+    .telegram-icon {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      background-color: #0088cc;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      z-index: 1000;
+      color: #fff;
+      font-size: 24px;
+      text-decoration: none;
+    }
+    .telegram-icon:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    }
+    @media (max-width: 1200px) {
+      .product-card {
+        flex: 0 0 calc(25% - 20px);
+        max-width: calc(25% - 20px);
+      }
+      .product-image {
+        aspect-ratio: 1 / 1;
+      }
+    }
+    @media (max-width: 768px) {
+      .product-card {
+        flex: 0 0 calc(33.333% - 20px);
+        max-width: calc(33.333% - 20px);
+      }
+      .product-image {
+        aspect-ratio: 1 / 1;
+      }
+    }
+    @media (max-width: 480px) {
+      .product-container {
+        gap: 15px;
+      }
+      .product-card {
+        flex: 0 0 calc(50% - 15px);
+        max-width: calc(50% - 15px);
+      }
+      .product-image {
+        aspect-ratio: 1 / 1;
+      }
+      .category-title {
+        font-size: 1.5em;
+      }
+      .telegram-icon {
+        width: 40px;
+        height: 40px;
+        bottom: 15px;
+        right: 15px;
+        font-size: 20px;
+      }
+    }
+  </style>
 </head>
-<body >
-<div id="app">
+<body>
+  <div id="app">
     <div v-for="item in list" class="category-section">
-        <h2 class="category-title">{{item.category}}</h2>
-        <div class="product-container">
-            <div v-for="subItem in item.plist" class="product-card">
-                <img :src='subItem.cover' loading="lazy"  class="product-image">
-                <div class="product-price">${{subItem.price}}</div>
-                <div class="buy-links">
-                    
-                    <a v-for="linkItem in purchaseLinks(subItem.pid)" :href="linkItem.link" class="buy-link" target="_blank">{{linkItem.name}}</a>
-                    
-                </div>
-            </div>
+      <h2 class="category-title">{{item.category}}</h2>
+      <div class="product-container">
+        <div v-for="subItem in item.plist" class="product-card">
+          <img :src="subItem.cover" class="product-image" loading="lazy" :alt="'产品图片 ' + subItem.pid">
+          <div class="product-price">${{subItem.price}}</div>
+          <div class="buy-links">
+            <a v-for="linkItem in purchaseLinks(subItem.pid)" :href="linkItem.link" class="buy-link" target="_blank">{{linkItem.name}}</a>
+          </div>
         </div>
-
-    
-
-        <h2 class="category-title"></h2>
-        
+      </div>
     </div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-<script>
-var app = new Vue({
-  el: '#app',
-  data: {
-    list:[
-        {
-            category:"🧥Coats and Jackets🧥",
-            plist:[
-                {cover:"./image/cover-114.png" , price:80 , pid:"7571117522"},
-                {cover:"./image/cover-115.png" , price:67 , pid:"7571199196"},
-                {cover:"./image/cover-116.png" , price:91 , pid:"7569350529"},
-                {cover:"./image/cover-117.png" , price:88 , pid:"7570220814"},
-                {cover:"./image/cover-118.png" , price:40.8 , pid:"7569488427"},
-                {cover:"./image/cover-119.png" , price:36.8 , pid:"7569638463"},
-                {cover:"./image/cover-120.png" , price:66.8 , pid:"7571950028"},
-                {cover:"./image/cover-121.png" , price:62 , pid:"7570245693"},
-                {cover:"./image/cover-122.png" , price:58 , pid:"7572053014"},
-                {cover:"./image/cover-123.png" , price:79.88 , pid:"7569686501"},
-                {cover:"./image/cover-124.png" , price:57 , pid:"7569424911"},
-                {cover:"./image/cover-125.png" , price:49.5 , pid:"7570539229"},
-                {cover:"./image/cover-126.png" , price:82 , pid:"7572561756"},
-                {cover:"./image/cover-127.jpg" , price:71 , pid:"7570657989"},
-                {cover:"./image/cover-128.jpg" , price:77.6 , pid:"7572548304"},
-                {cover:"./image/cover-129.png" , price:71 , pid:"7570686283"},
-                {cover:"./image/cover-130.png" , price:66.7 , pid:"7570646985"},
-                {cover:"./image/cover-131.png" , price:45 , pid:"7572681598"},
-                {cover:"./image/cover-132.png" , price:69 , pid:"7572638210"},
-                {cover:"./image/cover-133.png" , price:79.8 , pid:"7570712751"},
-                {cover:"./image/cover-134.png" , price:79.8 , pid:"7572587492"},
-                {cover:"./image/cover-135.png" , price:45 , pid:"7570791985"},
-                {cover:"./image/cover-136.png" , price:79.8 , pid:"7572740038"},
-                {cover:"./image/cover-137.png" , price:95.8 , pid:"7572696752"},
-                {cover:"./image/cover-138.png" , price:71 , pid:"7572742416"},
-                {cover:"./image/cover-139.png" , price:92.6 , pid:"7572669350"},
-                {cover:"./image/cover-140.png" , price:120 , pid:"7570753893"},
-                {cover:"./image/cover-141.png" , price:58 , pid:"7572818130"},
-            ]
-        },
-        // {
-        //     category:"🥼Hoodies and Pants👖",
-        //     plist:[
-        //         {cover:"./image/1.jpg" , price:80 , cnfans:"gogole.com"},
-        //         {cover:"./image/1.jpg" , price:80 , cnfans:"gogole.com"},
-        //         {cover:"./image/1.jpg" , price:80 , cnfans:"gogole.com"},
-        //         {cover:"./image/1.jpg" , price:80 , cnfans:"gogole.com"},
-        //         {cover:"./image/1.jpg" , price:80 , cnfans:"gogole.com"},
-        //     ]
-        // },
-        // {
-        //     category:"👕T-shirt and Shorts🩳",
-        //     plist:[
-        //         {cover:"./image/1.jpg" , price:80 , cnfans:"gogole.com"},
-        //         {cover:"./image/1.jpg" , price:80 , cnfans:"gogole.com"},
-        //         {cover:"./image/1.jpg" , price:80 , cnfans:"gogole.com"},
-        //         {cover:"./image/1.jpg" , price:80 , cnfans:"gogole.com"},
-        //         {cover:"./image/1.jpg" , price:80 , cnfans:"gogole.com"},
-        //     ]
-        // },
-    ]
-  },
+  </div>
 
-  methods: {
+
+  <a href="https://t.me/+zQFcv5JPY-wxZTE1" class="telegram-icon" target="_blank" title="加入 Telegram">
+    <i class="fab fa-telegram-plane"></i>
+  </a>
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        list: [
+          {
+            category: "🧥Coats and Jackets🧥",
+            plist: [
+              {cover: "./image/cover-114.png", price: 80, pid: "7571117522"},
+              {cover: "./image/cover-115.png", price: 67, pid: "7571199196"},
+              {cover: "./image/cover-116.png", price: 91, pid: "7569350529"},
+              {cover: "./image/cover-117.png", price: 88, pid: "7570220814"},
+              {cover: "./image/cover-118.png", price: 40.8, pid: "7569488427"},
+              {cover: "./image/cover-119.png", price: 36.8, pid: "7569638463"},
+              {cover: "./image/cover-120.png", price: 66.8, pid: "7571950028"},
+              {cover: "./image/cover-121.png", price: 62, pid: "7570245693"},
+              {cover: "./image/cover-122.png", price: 58, pid: "7572053014"},
+              {cover: "./image/cover-123.png", price: 79.88, pid: "7569686501"},
+              {cover: "./image/cover-124.png", price: 57, pid: "7569424911"},
+              {cover: "./image/cover-125.png", price: 49.5, pid: "7570539229"},
+              {cover: "./image/cover-126.png", price: 82, pid: "7572561756"},
+              {cover: "./image/cover-127.jpg", price: 71, pid: "7570657989"},
+              {cover: "./image/cover-128.jpg", price: 77.6, pid: "7572548304"},
+              {cover: "./image/cover-129.png", price: 71, pid: "7570686283"},
+              {cover: "./image/cover-130.png", price: 66.7, pid: "7570646985"},
+              {cover: "./image/cover-131.png", price: 45, pid: "7572681598"},
+              {cover: "./image/cover-132.png", price: 69, pid: "7572638210"},
+              {cover: "./image/cover-133.png", price: 79.8, pid: "7570712751"},
+              {cover: "./image/cover-134.png", price: 79.8, pid: "7572587492"},
+              {cover: "./image/cover-135.png", price: 45, pid: "7570791985"},
+              {cover: "./image/cover-136.png", price: 79.8, pid: "7572740038"},
+              {cover: "./image/cover-137.png", price: 95.8, pid: "7572696752"},
+              {cover: "./image/cover-138.png", price: 71, pid: "7572742416"},
+              {cover: "./image/cover-139.png", price: 92.6, pid: "7572669350"},
+              {cover: "./image/cover-140.png", price: 120, pid: "7570753893"},
+              {cover: "./image/cover-141.png", price: 58, pid: "7572818130"},
+            ]
+          }
+        ]
+      },
+      methods: {
         purchaseLinks:(itemId)=> {
             console.log('itemId',itemId)
                 // 生成不同平台链接
@@ -259,7 +247,7 @@ var app = new Vue({
                     const encodedUrl = encodeURIComponent(weidianUrl);
 
                     // 创建各平台链接
-                    let a=  [
+                    return [
                         {name:'cnfans',link:`https://cnfans.com/product?id=${itemID}&platform=WEIDIAN`},
                         {name:'hoobuy',link:`https://hoobuy.com/product/2/${itemID}` },
                         {name:'oopbuy',link:`https://oopbuy.com/product/weidian/${itemID}` },
@@ -267,16 +255,10 @@ var app = new Vue({
                         {name:'allchinabuy',link:`https://www.allchinabuy.com/en/page/buy/?nTag=Home-search&from=search-input&_search=url&position=&url=${encodedUrl}` },
                         {name:'kakobuy',link:`https://www.kakobuy.com/item/details?url=${encodedUrl}` }
                     ]
-
-                    console.log('a',a)
-                    return a
             
         }
-    }
-
-
-
-})
-</script>
+      }
+    });
+  </script>
 </body>
 </html>
