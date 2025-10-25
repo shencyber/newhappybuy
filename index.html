@@ -102,25 +102,35 @@
     .buy-link:hover::after {
       width: 100%;
     }
-    .telegram-icon {
+    .social-icons {
       position: fixed;
       bottom: 20px;
       right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 1000;
+    }
+    .social-icon {
       width: 50px;
       height: 50px;
-      background-color: #0088cc;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      z-index: 1000;
+      text-decoration: none;
       color: #fff;
       font-size: 24px;
-      text-decoration: none;
     }
-    .telegram-icon:hover {
+    .telegram-icon {
+      background-color: #0088cc; /* Telegram 品牌色 */
+    }
+    .whatsapp-icon {
+      background-color: #25D366; /* WhatsApp 品牌色 */
+    }
+    .social-icon:hover {
       transform: scale(1.1);
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
     }
@@ -156,12 +166,15 @@
       .category-title {
         font-size: 1.5em;
       }
-      .telegram-icon {
+      .social-icon {
         width: 40px;
         height: 40px;
+        font-size: 20px;
+      }
+      .social-icons {
         bottom: 15px;
         right: 15px;
-        font-size: 20px;
+        gap: 8px;
       }
     }
   </style>
@@ -181,13 +194,14 @@
       </div>
     </div>
   </div>
-
-
-  <a href="https://t.me/+zQFcv5JPY-wxZTE1" class="telegram-icon" target="_blank" title="加入 Telegram">
-    <i class="fab fa-telegram-plane"></i>
-  </a>
-  
-
+  <div class="social-icons">
+    <a href="https://t.me/+zQFcv5JPY-wxZTE1" class="social-icon telegram-icon" target="_blank" title="加入 Telegram">
+      <i class="fab fa-telegram-plane"></i>
+    </a>
+    <a href="https://wa.me/your_whatsapp_number" class="social-icon whatsapp-icon" target="_blank" title="加入 WhatsApp">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+  </div>
   <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
   <script>
     var app = new Vue({
@@ -230,32 +244,21 @@
         ]
       },
       methods: {
-        purchaseLinks:(itemId)=> {
-            console.log('itemId',itemId)
-                // 生成不同平台链接
-                
-                    // 解析URL
-                    const parsedUrl = new URL(`https://weidian.com/item.html?itemID=${itemId}`);
-                    
-                    // 重建URL
-                    let weidianUrl =  parsedUrl.toString();
-
-                    const itemID = new URL(weidianUrl).searchParams.get('itemID');
-                    if (!itemID) throw new Error('无法从 URL 提取 itemID');
-                    
-                    // URL 编码原始链接
-                    const encodedUrl = encodeURIComponent(weidianUrl);
-
-                    // 创建各平台链接
-                    return [
-                        {name:'cnfans',link:`https://cnfans.com/product?id=${itemID}&platform=WEIDIAN`},
-                        {name:'hoobuy',link:`https://hoobuy.com/product/2/${itemID}` },
-                        {name:'oopbuy',link:`https://oopbuy.com/product/weidian/${itemID}` },
-                        {name:'mulebuy',link:`https://mulebuy.com/zh/product/?shop_type=weidian&id=${itemID}` },
-                        {name:'allchinabuy',link:`https://www.allchinabuy.com/en/page/buy/?nTag=Home-search&from=search-input&_search=url&position=&url=${encodedUrl}` },
-                        {name:'kakobuy',link:`https://www.kakobuy.com/item/details?url=${encodedUrl}` }
-                    ]
-            
+        purchaseLinks(itemId) {
+         
+          const parsedUrl = new URL(`https://weidian.com/item.html?itemID=${itemId}`);
+          const itemID = parsedUrl.searchParams.get('itemID');
+          if (!itemID) throw new Error('无法从 URL 提取 itemID');
+          const encodedUrl = encodeURIComponent(parsedUrl.toString());
+          return  [
+            {name: 'cnfans', link: `https://cnfans.com/product?id=${itemID}&platform=WEIDIAN`},
+            {name: 'hoobuy', link: `https://hoobuy.com/product/2/${itemID}`},
+            {name: 'oopbuy', link: `https://oopbuy.com/product/weidian/${itemID}`},
+            {name: 'mulebuy', link: `https://mulebuy.com/zh/product/?shop_type=weidian&id=${itemID}`},
+            {name: 'allchinabuy', link: `https://www.allchinabuy.com/en/page/buy/?nTag=Home-search&from=search-input&_search=url&position=&url=${encodedUrl}`},
+            {name: 'kakobuy', link: `https://www.kakobuy.com/item/details?url=${encodedUrl}`}
+          ];
+          
         }
       }
     });
