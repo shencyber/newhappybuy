@@ -6,7 +6,7 @@
   <title>Newhappybuy</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
+<style>
   * {
     margin: 0;
     padding: 0;
@@ -24,6 +24,7 @@
   .category-section {
     width: 100%;
     max-width: 1280px;
+    margin: 0 auto; /* 添加居中样式 */
     margin-bottom: 40px;
   }
   .category-title {
@@ -36,7 +37,7 @@
   .product-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: flex-start; /* 保持卡片左对齐，可选改为 center */
     gap: 16px;
     width: 100%;
   }
@@ -88,7 +89,7 @@
   .buy-link-icon {
     width: 16px;
     height: 16px;
-    
+    border: 1px solid red;
   }
   .buy-link {
     text-decoration: none;
@@ -98,7 +99,7 @@
     position: relative;
     transition: all 0.3s ease;
     letter-spacing: 0.2px;
-    
+    border: 1px solid red;
   }
   .buy-link::after {
     content: '';
