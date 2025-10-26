@@ -14,11 +14,10 @@
 
     <!-- 导航 -->
     <div class="nav-container">
-      <a href="./index.html" class="nav-link nav-link-active">Home</a>
-      <a href="./all.html?categoryId=1" class="nav-link">Coats</a>
-      <a href="./all.html?categoryId=2" class="nav-link">Hoodies</a>
+      <a href="./index.html" class="nav-link"  >Home</a>
+      <a href="./all.html?categoryId=1" class="nav-link" :class="{ 'nav-link-active': isActive(1) }">Coats</a>
+      <a href="./all.html?categoryId=2" class="nav-link" :class="{ 'nav-link-active': isActive(2) }">Hoodies</a>
     </div>
-
 
     <div v-for="item in list" class="category-section">
       <h2 class="category-title">{{item.category}}</h2>
@@ -36,10 +35,6 @@
           </div>
         </div>
       </div>
-
-      <!-- ✅ 新增“查看更多”按钮 -->
-      <a :href="'./all.html?categoryId='+item.categoryId" class="fancy-button">View More<span class="arrow">→</span></a>
-
     </div>
     <div class="social-icons">
       <a href="https://t.me/+zQFcv5JPY-wxZTE1" class="social-icon telegram-icon" target="_blank" title="Join Telegram">
@@ -58,9 +53,11 @@
     var app = new Vue({
       el: '#app',
       data: {
-        list: [
+        currentCategoryId:0,
+        list:[],  //要渲染的类目
+        allList: [
           {
-            categoryId:1,
+            categoryId: 1,
             category: "🧥Coats and Jackets🧥",
             plist:[
               {cover: "./image/cover-114.png", price: 80, pid: "7571117522"},
@@ -81,20 +78,20 @@
               {cover: "./image/cover-129.png", price: 71, pid: "7570686283"},
               {cover: "./image/cover-130.png", price: 66.7, pid: "7570646985"},
               {cover: "./image/cover-131.png", price: 45, pid: "7572681598"},
-              // {cover: "./image/cover-132.png", price: 69, pid: "7572638210"},
-              // {cover: "./image/cover-133.png", price: 79.8, pid: "7570712751"},
-              // {cover: "./image/cover-134.png", price: 79.8, pid: "7572587492"},
-              // {cover: "./image/cover-135.png", price: 45, pid: "7570791985"},
-              // {cover: "./image/cover-136.png", price: 79.8, pid: "7572740038"},
-              // {cover: "./image/cover-137.png", price: 95.8, pid: "7572696752"},
-              // {cover: "./image/cover-138.png", price: 71, pid: "7572742416"},
-              // {cover: "./image/cover-139.png", price: 92.6, pid: "7572669350"},
-              // {cover: "./image/cover-140.png", price: 120, pid: "7570753893"},
-              // {cover: "./image/cover-141.png", price: 58, pid: "7572818130"},
+              {cover: "./image/cover-132.png", price: 69, pid: "7572638210"},
+              {cover: "./image/cover-133.png", price: 79.8, pid: "7570712751"},
+              {cover: "./image/cover-134.png", price: 79.8, pid: "7572587492"},
+              {cover: "./image/cover-135.png", price: 45, pid: "7570791985"},
+              {cover: "./image/cover-136.png", price: 79.8, pid: "7572740038"},
+              {cover: "./image/cover-137.png", price: 95.8, pid: "7572696752"},
+              {cover: "./image/cover-138.png", price: 71, pid: "7572742416"},
+              {cover: "./image/cover-139.png", price: 92.6, pid: "7572669350"},
+              {cover: "./image/cover-140.png", price: 120, pid: "7570753893"},
+              {cover: "./image/cover-141.png", price: 58, pid: "7572818130"},
             ]
           },
           {
-            categoryId:2,
+            categoryId: 2,
             category: "🥼Hoodies and Pants👖",
             plist:[
               {cover: "./image/cover-103.jpg", price: 17.5, pid: "7545705483"},
@@ -115,15 +112,49 @@
               {cover: "./image/cover-90.jpg", price: 16,  pid: "7537534355"},
               {cover: "./image/cover-102.jpg", price: 16,  pid: "7537941571"},
               {cover: "./image/cover-59.jpg", price: 16,  pid: "7529712419"},
-              // {cover: "./image/cover-6.jpg", price: 27,  pid: "7524139883"},
-              // {cover: "./image/cover-99.jpg", price: 16,  pid: "7537876993"},
-              // {cover: "./image/cover-65.jpg", price: 16.8,  pid: "7531929544"},
-              // {cover: "./image/cover-57.jpg", price: 16.8,  pid: "7531548604"},
+              {cover: "./image/cover-6.jpg", price: 27,  pid: "7524139883"},
+              {cover: "./image/cover-99.jpg", price: 16,  pid: "7537876993"},
+              {cover: "./image/cover-65.jpg", price: 16.8,  pid: "7531929544"},
+              {cover: "./image/cover-57.jpg", price: 16.8,  pid: "7531548604"},
+              {cover: "./image/cover-101.jpg", price: 16,  pid: "7539863848"},
+              {cover: "./image/cover-58.jpg", price: 16,  pid: "7531652060"},
+              {cover: "./image/cover-55.jpg", price: 16,  pid: "7531621632"},
+              {cover: "./image/cover-54.jpg", price: 16,  pid: "7531637634"},
+              {cover: "./image/cover-47.jpg", price: 16,  pid: "7529440539"},
+              {cover: "./image/cover-98.jpg", price: 16,  pid: "7537926065"},
+              {cover: "./image/cover-77.jpeg", price: 16,  pid: "7534917349"},
+              {cover: "./image/cover-110.jpg", price: 25,  pid: "7542239154"},
+              {cover: "./image/cover-53.jpg", price: 16,  pid: "7531511142"},
+              {cover: "./image/cover-48.jpg", price: 16,  pid: "7531320786"},
+              {cover: "./image/cover-52.jpg", price: 16,  pid: "7530699432"},
+              {cover: "./image/cover-46.jpg", price: 16.8,  pid: "7529500101"},
+              {cover: "./image/cover-97.jpg", price: 16,  pid: "7537906213"},
+              {cover: "./image/cover-96.jpg", price: 16,  pid: "7539344786"},
+              {cover: "./image/cover-51.jpg", price: 16,  pid: "7529479369"},
+              {cover: "./image/cover-93.jpg", price: 16.8,  pid: "7537470401"},
+              {cover: "./image/cover-91.jpg", price: 16.8,  pid: "7539407314"},
+              {cover: "./image/cover-92.jpg",  price: 16.8,  pid: "7539436520"},
+              {cover: "./image/cover-89.jpg",  price: 16.8,  pid: "7539275496"},
+              {cover: "./image/cover-94.jpg",  price: 16.8,  pid: "7583702935"},
+              {cover: "./image/cover-95.jpg",  price: 16.8,  pid: "7583771765"},
+              {cover: "./image/cover-100.jpg",  price: 16,  pid: "7539350876"},
               
             ]
           }
 
         ]
+      },
+
+      mounted(){
+        // 获取 URL 参数
+        const urlParams = new URLSearchParams(window.location.search);
+        this.currentCategoryId = urlParams.get('categoryId')
+        this.allList.forEach( item=>{
+          if(item.categoryId ==  this.currentCategoryId)
+          this.list = [item]
+        })
+
+
       },
       methods: {
         purchaseLinks(itemId) {
@@ -140,17 +171,17 @@
             {name: 'kakobuy', icon: "./icon/kakobuy.png", link: `https://www.kakobuy.com/item/details?url=${encodedUrl}`}
           ];
         },
-
-        isActive(path) {
-          // 判断当前页面路径是否匹配
-          return window.location.pathname === path;
+        isActive(id) {
+          console.log('idi',id)
+          console.log('categoryId',this.currentCategoryId)
+          console.log(this.currentCategoryId == id)
+          return this.currentCategoryId == id;
         }
-
 
       }
     });
   </script>
-
+  
   <script>
   window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
 </script>
