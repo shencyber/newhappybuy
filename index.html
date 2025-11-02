@@ -28,6 +28,7 @@
         <div class="product-inner">
           <div v-for="subItem in item.plist" class="product-card">
             <img :src='"https://bsoczvp77bhwdngw.public.blob.vercel-storage.com/"+subItem.cover' class="product-image" loading="lazy" :alt="'产品图片 ' + subItem.pid">
+            <!-- <img :src='subItem.cover' class="product-image" loading="lazy" :alt="'产品图片 ' + subItem.pid"> -->
             <div class="product-price">${{subItem.price}}</div>
             <div class="buy-links">
               <span v-for="linkItem in purchaseLinks(subItem.pid)" class="buy-link-item">
@@ -110,14 +111,19 @@
               
             ]
           },
-          // {
-          //   categoryId:3,
-          //   category: "👕T-shirt and Shorts🩳",
-          //   plist:[
-          //     {cover: "cover-103.jpg", price: 17.5, pid: "7545705483"},
+          {
+            categoryId:3,
+            category: "👕T-shirt and Shorts🩳",
+            plist:[
+              {cover: "cover-76.jpg", price: 12, pid: "7541821287"},
+              {cover: "cover-75.jpg", price: 12, pid: "7534492394"},
+              {cover: "cover-25.jpg", price: 12, pid: "7529708428"},
+              {cover: "cover-23.jpg", price: 12, pid: "7529565254"},
+              {cover: "cover-74.jpg", price: 12, pid: "7534357488"},
+              {cover: "cover-73.jpg", price: 12, pid: "7532467373"},
               
-          //   ]
-          // }
+            ]
+          }
 
         ]
       },
