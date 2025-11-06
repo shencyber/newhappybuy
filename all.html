@@ -3,29 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>Newhappybuy</title>
-  <link rel="stylesheet" href="./style.css">
+
+  <link rel="stylesheet" href="./style/index.css">
+
+  <!-- 字体与图标 -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
+
 </head>
 <body>
   <div id="app">
 
-    <!-- 导航 -->
-    <div class="nav-container">
-      <a href="./index.html" class="nav-link"  >Home</a>
-      <a href="./all.html?categoryId=1" class="nav-link" :class="{ 'nav-link-active': isActive(1) }">Coats</a>
-      <a href="./all.html?categoryId=2" class="nav-link" :class="{ 'nav-link-active': isActive(2) }">Hoodies</a>
-      <a href="./all.html?categoryId=3" class="nav-link" :class="{ 'nav-link-active': isActive(3) }">T-shirts</a>
-    </div>
+   <!-- 使用导航组件 -->
+    <nav-component></nav-component>
 
     <div v-for="item in list" class="category-section">
       <h2 class="category-title">{{item.category}}</h2>
       <div class="product-container">
         <div class="product-inner">
-          <div v-for="subItem in item.plist" class="product-card">
-            <img :src='"https://bsoczvp77bhwdngw.public.blob.vercel-storage.com/"+subItem.cover' class="product-image" loading="lazy" :alt="'产品图片 ' + subItem.pid">
+          <div v-for="subItem in item.currentPlist" class="product-card">
+              <a :href='"./detail.html?categoryId="+currentCategoryId+"&pid="+subItem.pid' >
+              <!-- <img :src='"./image/"+subItem.cover' class="product-image" loading="lazy" :alt="'产品图片 ' + subItem.pid">  -->
+              <img :src='subItem.cover' class="product-image" loading="lazy" :alt="'image ' + subItem.pid"> 
+            </a>
             <div class="product-price">${{subItem.price}}</div>
             <div class="buy-links">
               <span v-for="linkItem in purchaseLinks(subItem.pid)" class="buy-link-item">
@@ -36,190 +40,76 @@
           </div>
         </div>
       </div>
+      <button v-if="item.hasNextPage" @click="loadMore(item)" class="fancy-button">View More
+        <!-- <span class="arrow">→</span> -->
+      </button>
+      <button v-else class="fancy-button" disabled>Loaded All</button>
     </div>
-    <div class="social-icons">
-      <a href="https://t.me/+zQFcv5JPY-wxZTE1" class="social-icon telegram-icon" target="_blank" title="Join Telegram">
-        <i class="fab fa-telegram-plane"></i>
-      </a>
-      <a href="https://wa.me/8617706270893" class="social-icon whatsapp-icon" target="_blank" title="Join WhatsApp">
-        <i class="fab fa-whatsapp"></i>
-      </a>
-      <a href="https://www.tiktok.com/@qqww3968" class="social-icon tiktok-icon" target="_blank" title="Follow TikTok">
-        <i class="fab fa-tiktok"></i>
-      </a>
-    </div>
+
+    <social-component></social-component>
+
   </div>
+  
+
   <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <!-- 引入导航组件 -->
+  <script src="./component/NavComponent.js"></script>
+  <script src="./component/SocialComponent.js"></script>
+
+  
   <script>
     var app = new Vue({
       el: '#app',
       data: {
-        currentCategoryId:0,
-        list:[],  //要渲染的类目
-        allList: [
-          {
-            categoryId: 1,
-            category: "🧥Coats and Jackets🧥",
-            plist:[
-              {cover: "cover-143.png", price: 92.8, pid: "7584459549"},
-              {cover: "cover-142.png", price: 71.7, pid: "7586393084"},
-              {cover: "cover-114.png", price: 80, pid: "7571117522"},
-              {cover: "cover-115.png", price: 67, pid: "7571199196"},
-              {cover: "cover-116.png", price: 91, pid: "7569350529"},
-              {cover: "cover-117.png", price: 88, pid: "7570220814"},
-              {cover: "cover-118.png", price: 40.8, pid: "7569488427"},
-              {cover: "cover-119.png", price: 36.8, pid: "7569638463"},
-              {cover: "cover-120.png", price: 66.8, pid: "7571950028"},
-              {cover: "cover-121.png", price: 62, pid: "7570245693"},
-              {cover: "cover-122.png", price: 58, pid: "7572053014"},
-              {cover: "cover-123.png", price: 79.88, pid: "7569686501"},
-              {cover: "cover-124.png", price: 57, pid: "7569424911"},
-              {cover: "cover-125.png", price: 49.5, pid: "7570539229"},
-              {cover: "cover-126.png", price: 82, pid: "7572561756"},
-              {cover: "cover-127.jpg", price: 71, pid: "7570657989"},
-              {cover: "cover-128.jpg", price: 77.6, pid: "7572548304"},
-              {cover: "cover-129.png", price: 71, pid: "7570686283"},
-              {cover: "cover-130.png", price: 66.7, pid: "7570646985"},
-              {cover: "cover-131.png", price: 45, pid: "7572681598"},
-              {cover: "cover-132.png", price: 69, pid: "7572638210"},
-              {cover: "cover-133.png", price: 79.8, pid: "7570712751"},
-              {cover: "cover-134.png", price: 79.8, pid: "7572587492"},
-              {cover: "cover-135.png", price: 45, pid: "7570791985"},
-              {cover: "cover-136.png", price: 79.8, pid: "7572740038"},
-              {cover: "cover-137.png", price: 95.8, pid: "7572696752"},
-              {cover: "cover-138.png", price: 71, pid: "7572742416"},
-              {cover: "cover-139.png", price: 92.6, pid: "7572669350"},
-              {cover: "cover-140.png", price: 120, pid: "7570753893"},
-              {cover: "cover-141.png", price: 58, pid: "7572818130"},
-              {cover: "cover-37.jpg", price: 29.6, pid: "7528457481"},
-              {cover: "cover-112.jpg", price: 44.8, pid: "7554431205"},
-              {cover: "cover-16.jpg", price: 28.8, pid: "7527196559"},
-              {cover: "cover-17.jpg", price: 28.8, pid: "7527223695"},
-              {cover: "cover-18.jpg", price: 30.8, pid: "7545966215"},
-              {cover: "cover-19.jpg", price: 28.8, pid: "7528720974"},
-              {cover: "cover-22.jpg", price: 27, pid: "7529144280"},
-              {cover: "cover-111.jpg", price: 21.6, pid: "7540009378"},
-              {cover: "cover-36.jpg", price: 36.8, pid: "7528507077"},
-              {cover: "cover-42.jpg", price: 24, pid: "7530595280"},
-              {cover: "cover-45.jpg", price: 24.8, pid: "7530778412"},
-              {cover: "cover-64.jpg", price: 19.2, pid: "7532004762"},
-              {cover: "cover-66.jpg", price: 24, pid: "7532151932"},
-              {cover: "cover-7.jpg", price: 54, pid: "7526883421"},
-              {cover: "cover-8.jpg", price: 60.8, pid: "7526045273"},
-              {cover: "cover-9.jpg", price: 48, pid: "7526312579"},
-              {cover: "cover-12.jpg", price: 49.6, pid: "7527025817"},
-              {cover: "cover-40.jpg", price: 24.8, pid: "7528744867"},
-              {cover: "cover-44.jpg", price: 22.4, pid: "7528788787"},
-              {cover: "cover-82.jpg", price: 64.8, pid: "7537147274"},
-              {cover: "cover-113.jpg", price: 57.6, pid: "7554539629"},
-              {cover: "cover-83.jpg", price: 41.6, pid: "7537212196"},
-              {cover: "cover-107.jpg", price: 21.6, pid: "7547795298"},
-              {cover: "cover-109.jpg", price: 19.2, pid: "7538195817"},
-              {cover: "cover-1.jpg", price: 48, pid: "7525820304"},
-              {cover: "cover-2.jpg", price: 49.6, pid: "7525844292"},
-              {cover: "cover-3.jpg", price: 54.4, pid: "7525829118"},
-              {cover: "cover-4.jpg", price: 51.2, pid: "7526891228"},
-              {cover: "cover-5.jpg", price: 51.2, pid: "7528740956"},
-              {cover: "cover-10.png", price: 44.8, pid: "7528852150"},
-              {cover: "cover-11.jpg", price: 44.8, pid: "7526967937"},
-              {cover: "cover-13.jpg", price: 65.6, pid: "7528870436"},
-              {cover: "cover-14.jpg", price: 46.4, pid: "7528920056"},
-              {cover: "cover-15.jpg", price: 49.6, pid: "7528890396"},
-              {cover: "cover-30.jpg", price: 48.8, pid: "7528433391"},
-              {cover: "cover-34.jpg", price: 49.6, pid: "7528492923"},
-              {cover: "cover-35.jpg", price: 36, pid: "7528506993"},
-              {cover: "cover-39.png", price: 26.4, pid: "7530671878"},
-              {cover: "cover-43.jpg", price: 22.4, pid: "7530707744"},
-              {cover: "cover-80.jpg", price: 43.2, pid: "7536963768"},
-              {cover: "cover-81.jpg", price: 41.6, pid: "7537040168"},
-              {cover: "cover-86.jpg", price: 24.8, pid: "7536539465"},
-              {cover: "cover-106.jpg", price: 19.2, pid: "7538120399"},
-              {cover: "cover-20.jpg", price: 27.2, pid: "7527189443"},
-              {cover: "cover-21.jpg", price: 28.8, pid: "7527205145"},
-            ]
-          },
-          {
-            categoryId: 2,
-            category: "🥼Hoodies and Pants👖",
-            plist:[
-              {cover: "cover-103.jpg", price: 17.5, pid: "7545705483"},
-              {cover: "cover-56.jpg", price: 24.8, pid: "7529779659"},
-              {cover: "cover-49.jpg", price: 16, pid: "7531281210"},
-              {cover: "cover-105.jpg", price: 15.9, pid: "7538021511"},
-              {cover: "cover-108.jpg", price: 30, pid: "7538152229"},
-              {cover: "cover-79.jpg", price: 15.99, pid: "7545883403"},
-              {cover: "cover-88.jpg", price: 24.7, pid: "7538318798"},
-              {cover: "cover-87.jpg", price: 24.7, pid: "7536669895"},
-              {cover: "cover-85.jpg", price: 23, pid: "7536564491"},
-              {cover: "cover-84.jpg", price: 26, pid: "7536400409"},
-              {cover: "cover-63.jpg", price: 15, pid: "7530076935"},
-              {cover: "cover-61.jpg", price: 16.8, pid: "7532011654"},
-              {cover: "cover-38.jpg", price: 20,  pid: "7530576484"},
-              {cover: "cover-60.jpg", price: 16,  pid: "7531871390"},
-              {cover: "cover-50.jpg", price: 16,  pid: "7529455285"},
-              {cover: "cover-90.jpg", price: 16,  pid: "7537534355"},
-              {cover: "cover-102.jpg", price: 16,  pid: "7537941571"},
-              {cover: "cover-59.jpg", price: 16,  pid: "7529712419"},
-              {cover: "cover-6.jpg", price: 27,  pid: "7524139883"},
-              {cover: "cover-99.jpg", price: 16,  pid: "7537876993"},
-              {cover: "cover-65.jpg", price: 16.8,  pid: "7531929544"},
-              {cover: "cover-57.jpg", price: 16.8,  pid: "7531548604"},
-              {cover: "cover-101.jpg", price: 16,  pid: "7539863848"},
-              {cover: "cover-58.jpg", price: 16,  pid: "7531652060"},
-              {cover: "cover-55.jpg", price: 16,  pid: "7531621632"},
-              {cover: "cover-54.jpg", price: 16,  pid: "7531637634"},
-              {cover: "cover-47.jpg", price: 16,  pid: "7529440539"},
-              {cover: "cover-98.jpg", price: 16,  pid: "7537926065"},
-              {cover: "cover-77.jpeg", price: 16,  pid: "7534917349"},
-              {cover: "cover-110.jpg", price: 25,  pid: "7542239154"},
-              {cover: "cover-53.jpg", price: 16,  pid: "7531511142"},
-              {cover: "cover-48.jpg", price: 16,  pid: "7531320786"},
-              {cover: "cover-52.jpg", price: 16,  pid: "7530699432"},
-              {cover: "cover-46.jpg", price: 16.8,  pid: "7529500101"},
-              {cover: "cover-97.jpg", price: 16,  pid: "7537906213"},
-              {cover: "cover-96.jpg", price: 16,  pid: "7539344786"},
-              {cover: "cover-51.jpg", price: 16,  pid: "7529479369"},
-              {cover: "cover-93.jpg", price: 16.8,  pid: "7537470401"},
-              {cover: "cover-91.jpg", price: 16.8,  pid: "7539407314"},
-              {cover: "cover-92.jpg",  price: 16.8,  pid: "7539436520"},
-              {cover: "cover-89.jpg",  price: 16.8,  pid: "7539275496"},
-              {cover: "cover-94.jpg",  price: 16.8,  pid: "7583702935"},
-              {cover: "cover-95.jpg",  price: 16.8,  pid: "7583771765"},
-              {cover: "cover-100.jpg",  price: 16,  pid: "7539350876"},
-              
-            ]
-          },
-          {
-            categoryId:3,
-            category: "👕T-shirt and Shorts🩳",
-            plist:[
-              {cover: "cover-76.jpg", price: 12, pid: "7541821287"},
-              {cover: "cover-75.jpg", price: 12, pid: "7534492394"},
-              {cover: "cover-25.jpg", price: 12, pid: "7529708428"},
-              {cover: "cover-23.jpg", price: 12, pid: "7529565254"},
-              {cover: "cover-74.jpg", price: 12, pid: "7534357488"},
-              {cover: "cover-73.jpg", price: 12, pid: "7532467373"},
-              {cover: "cover-72.jpg", price: 12, pid: "7534155192"},
-              {cover: "cover-034.jpg", price: 12, pid: "7528064281"},
-              
-            ]
-          }
-
-        ]
-      },
-
-      mounted(){
-        // 获取 URL 参数
-        const urlParams = new URLSearchParams(window.location.search);
-        this.currentCategoryId = urlParams.get('categoryId')
-        this.allList.forEach( item=>{
-          if(item.categoryId ==  this.currentCategoryId)
-          this.list = [item]
-        })
-
-
+        currentCategoryId: 0,
+        list: [],  // 要渲染的类目（从JSON过滤后）
+        allList: []  // 完整数据源，从JSON加载
       },
       methods: {
+        async loadData() {
+          try {
+            const response = await fetch('./data.json');  // 读取data.json（调整路径如果需要）
+            if (!response.ok) {
+              throw new Error('加载数据失败: ' + response.status);
+            }
+            const data = await response.json();
+            const pageSize = 12;  // 只需修改这里（每页6条），其他自动适应
+            this.allList = data.map(category => ({
+              ...category,
+              page: 1,  // 当前页码
+              pageSize: pageSize,  // 每页数量
+              currentPlist: category.plist.slice(0, pageSize),  // 初始显示第一页（动态）
+              totalPages: Math.ceil(category.plist.length / pageSize),  // 总页数（动态）
+              hasNextPage: category.plist.length > pageSize  // 初始是否有下一页（动态）
+            }));  // 添加分页相关属性
+
+            // 获取 URL 参数并过滤
+            const urlParams = new URLSearchParams(window.location.search);
+            this.currentCategoryId = parseInt(urlParams.get('categoryId')) || 0;
+            if (this.currentCategoryId > 0) {
+              // 单类别显示：过滤匹配的类别
+              this.list = this.allList.filter(item => item.categoryId == this.currentCategoryId);
+            } else {
+              // 无参数：显示所有类别
+              this.list = this.allList;
+            }
+          } catch (error) {
+            console.error('读取JSON失败:', error);
+            // 可选：设置默认数据或显示错误提示
+          }
+        },
+        loadMore(item) {
+          // 加载下一页
+          item.page += 1;
+          if (item.page <= item.totalPages) {
+            const start = (item.page - 1) * item.pageSize;
+            const end = start + item.pageSize;
+            const nextPage = item.plist.slice(start, end);
+            item.currentPlist = item.currentPlist.concat(nextPage);
+            // 更新是否有下一页
+            item.hasNextPage = item.page < item.totalPages;
+          }
+        },
         purchaseLinks(itemId) {
           const parsedUrl = new URL(`https://weidian.com/item.html?itemID=${itemId}`);
           const itemID = parsedUrl.searchParams.get('itemID');
@@ -235,19 +125,18 @@
           ];
         },
         isActive(id) {
-          console.log('idi',id)
-          console.log('categoryId',this.currentCategoryId)
-          console.log(this.currentCategoryId == id)
           return this.currentCategoryId == id;
         }
-
+      },
+      mounted() {
+        this.loadData();  // 页面加载后异步读取并过滤数据
       }
     });
   </script>
   
   <script>
   window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-  window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+  window.si = window.si || function () { (window.si q = window.siq || []).push(arguments); };
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
