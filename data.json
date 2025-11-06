@@ -194,7 +194,7 @@
         ]
       },
       {
-        "id": "122",
+        "id": 122,
         "cover": "https://si.geilicdn.com/pcitem901979398095-438f00000199d86e46be0a81347d-unadjust_1618_1618.png",
         "price": 58,
         "pid": "7572053014",
@@ -217,7 +217,7 @@
             ]
       },
       {
-        "id": "123",
+        "id": 123,
         "cover": "https://si.geilicdn.com/pcitem901979398095-353a00000199d8c64bbe0a20e2c5-unadjust_1903_1644.png",
         "price": 79.88,
         "pid": "7569686501",
@@ -239,7 +239,7 @@
         ]
       },
       {
-        "id": "124.png",
+        "id": 124,
         "cover": "https://si.geilicdn.com/pcitem901979398095-3e0700000199d8e55cd70a2304aa-unadjust_541_675.png",
         "price": 57,
         "pid": "7569424911",
@@ -262,7 +262,7 @@
         ]
       },
       {
-        "id": "125.png",
+        "id":125,
         "cover": "https://si.geilicdn.com/pcitem901979398095-10ab00000199dc1b36120a207569-unadjust_1209_1430.png",
         "price": 49.5,
         "pid": "7570539229",
@@ -286,7 +286,7 @@
         ]
       },
       {
-        "id": "126.png",
+        "id": 126,
         "cover": "https://si.geilicdn.com/pcitem901979398095-14e400000199dc40f1650a239646-unadjust_2481_3355.png",
         "price": 82,
         "pid": "7572561756",
@@ -309,7 +309,7 @@
         ]
       },
       {
-        "id": "127",
+        "id": 127,
         "cover": "https://si.geilicdn.com/pcitem901979398095-205500000199dc5e2a8a0a231177_1800_1800.jpg",
         "price": 71,
         "pid": "7570657989",
@@ -332,7 +332,7 @@
         ]
       },
       {
-        "id": "128",
+        "id": 128,
         "cover": "https://si.geilicdn.com/pcitem901979398095-285100000199dc6ec2be0a207569_1080_1080.jpg",
         "price": 77.6,
         "pid": "7572548304",
@@ -356,7 +356,7 @@
         ]
       },
       {
-        "id": "129",
+        "id": 129,
         "cover": "https://si.geilicdn.com/pcitem901979398095-34bc00000199dcb0e9400a239646_1280_1280.jpg",
         "price": 71,
         "pid": "7570686283",
@@ -378,7 +378,7 @@
         ]
       },
       {
-        "id": "130",
+        "id": 130,
         "cover": "https://si.geilicdn.com/pcitem901979398095-638d00000199dccc69530a2103bd_1280_1280.jpg",
         "price": 66.7,
         "pid": "7570646985",
@@ -401,7 +401,7 @@
         ]
       },
       {
-        "id": "131",
+        "id": 131,
         "cover": "https://si.geilicdn.com/pcitem901979398095-26d700000199dd1c47820a210139_1280_1280.jpg",
         "price": 45,
         "pid": "7572681598",
@@ -432,7 +432,7 @@
     "category": "Hoodies and Pants",
     "plist": [
       {
-        "id": "103",
+        "id": 103,
         "cover": "https://si.geilicdn.com/pcitem901979398095-74ab00000198ff701e6d0a239846_1024_1024.jpg",
         "price": 17.5,
         "pid": "7545705483",
@@ -452,7 +452,7 @@
         ]
       },
       {
-        "id": "56",
+        "id": 56,
         "cover": "https://si.geilicdn.com/pcitem901979398095-067300000198ccfe28580a239646_1100_1100.jpg",
         "price": 24.8,
         "pid": "7529779659",
@@ -477,7 +477,7 @@
         ]
       },
       {
-        "id": "49",
+        "id": 49,
         "cover": "https://si.geilicdn.com/pcitem901979398095-4b3800000198cbe43c040a8133cc_1081_1014.jpg",
         "price": 16,
         "pid": "7531281210",
@@ -525,7 +525,7 @@
         ]
       },
       {
-        "id": "108.jpg",
+        "id": "108",
         "cover": "https://si.geilicdn.com/pcitem901979398095-5b2b000001990022d2730a210256_1152_1138.jpg",
         "price": 30,
         "pid": "7538152229",
