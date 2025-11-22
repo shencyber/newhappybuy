@@ -50,6 +50,7 @@ Vue.component('social-component', {
           flex-direction: column;
           gap: 10px;
           z-index: 1000;
+          text-decoration: none; /* 取消下划线 */
         }
 
         .social-icon {
