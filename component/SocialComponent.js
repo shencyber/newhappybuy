@@ -50,7 +50,6 @@ Vue.component('social-component', {
           flex-direction: column;
           gap: 10px;
           z-index: 1000;
-          text-decoration: none; /* 取消下划线 */
         }
 
         .social-icon {
@@ -66,6 +65,7 @@ Vue.component('social-component', {
           transition: all 0.3s ease;
           border: none;
           cursor: pointer;
+          text-decoration: none; /* 取消下划线 */
         }
 
         .telegram-icon { background-color: #0088cc; }
