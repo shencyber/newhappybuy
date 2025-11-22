@@ -339,8 +339,6 @@
                             this.currentProductImages = result.data.images || [];
                             this.currentMainIndex = 0;
                             
-                            console.log('商品数据:', this.currentProduct);
-                            console.log('图片数据:', this.currentProductImages);
                             
                             // 使用 $nextTick 确保DOM已经更新
                             this.$nextTick(() => {
@@ -353,7 +351,7 @@
                             this.error = result.msg || 'Failed to load product details';
                         }
                     } catch (err) {
-                        console.error('加载商品详情失败:', err);
+                        console.error('load error:', err);
                         this.error = 'Network error, please try again later';
                     } finally {
                         this.loading = false;
@@ -473,7 +471,7 @@
 
                         const slideImg = document.createElement('img');
                         slideImg.src = this.getImageUrl(img.url);
-                        slideImg.alt = `商品图片 ${index + 1}`;
+                        slideImg.alt = `image  ${index + 1}`;
                         slideImg.loading = 'lazy';
                         slideImg.addEventListener('click', (e) => {
                             e.stopPropagation();
@@ -497,7 +495,7 @@
                     this.currentProductImages.forEach((img, index) => {
                         const imgElement = document.createElement('img');
                         imgElement.src = this.getImageUrl(img.url);
-                        imgElement.alt = `商品图片 ${index + 1}`;
+                        imgElement.alt = `image ${index + 1}`;
                         imgElement.loading = 'lazy';
                         imgElement.style.cursor = 'pointer';
                         imgElement.addEventListener('click', (e) => {
@@ -616,7 +614,7 @@
     </script>
     <script>
   window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-  window.si = window.si || function () { (window.si q = window.siq || []).push(arguments); };
+  window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
