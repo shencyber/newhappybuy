@@ -22,8 +22,8 @@ Vue.component('hot-component', {
       </div>
 
       <div class="featured-info">
-        <div class="featured-title">Luxury Winter Jacket</div>
-        <div class="featured-price">$299</div>
+        <div class="featured-title">Supreme SpongeBob x Jeff Hamilton SS Week 11 Collaboration  Best-Quality Jacket</div>
+        <div class="featured-price">$105.8</div>
         <a href="./detail.html?weidian_id=7615692677" class="featured-button">View Details</a>
       </div>
     </div>
