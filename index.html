@@ -81,6 +81,11 @@
         <p><i>Delivery in 7-14 business days with full tracking.</i></p>
     </div>
 
+
+    <hot-component></hot-component>
+
+
+
     <!-- 循环渲染每个分类的商品展示组件和分页按钮 -->
     <template v-for="categorySection in categorySectionData">
       <h2 class="category-title">{{categorySection.category}}</h2>
@@ -110,6 +115,7 @@
   <script src="./component/CategoryComponent.js"></script>
   <script src="./component/CategorySectionComponent.js"></script>
   <script src="./component/SocialComponent.js"></script>
+  <script src="./component/HotComponent.js"></script>
     
   <script>
    var app = new Vue({
