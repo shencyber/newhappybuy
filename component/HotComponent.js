@@ -4,7 +4,7 @@ Vue.component('hot-component', {
       <div class="featured-label">Premium</div>
 
       <div class="featured-image-wrapper">
-        <img :src="currentImage" class="featured-image">
+        <img :src="currentImage" class="featured-image" alt="Supreme SpongeBob x Jeff Hamilton SS Week 11 Collaboration  Best-Quality Jacket">
       </div>
 
       <div class="color-selector">
@@ -15,6 +15,8 @@ Vue.component('hot-component', {
             class="hot-spec-item"
             :class="{ active: selectedColor === color.name }"
             @click="selectColor(color)"
+            
+
           >
             {{ color.name }}
           </div>

@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A curated selection down jackets, jackets, outerwear, and hoodies. Lightweight, warm, windproof, and water-resistant designs for commuting, outdoor activities, and daily wear. Worldwide shipping available.">
+
     <title>Newhappybuy</title>
     <link rel="stylesheet" href="./style/detail.css">
     <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap"> -->
@@ -229,7 +231,7 @@
                 <img 
                     :src="getImageUrl(currentProductImages[currentMainIndex]?.url)" 
                     class="main-img" 
-                    alt="商品大图" 
+                    :alt="currentProduct.title" 
                     @click="openModal(currentMainIndex)"
                     @error="handleImageError"
                 >
@@ -280,7 +282,7 @@
                 <span class="close" @click="closeModal">&times;</span>
                 <img 
                     :src="getImageUrl(currentProductImages[modalImageIndex]?.url)" 
-                    :alt="`商品大图 ${modalImageIndex + 1}`"
+                    :alt="currentProduct.title"
                     @error="handleImageError"
                 >
                 <button v-if="currentProductImages.length > 1" class="prev" @click="prevModal">&lt;</button>
