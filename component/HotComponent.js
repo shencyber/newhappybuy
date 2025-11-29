@@ -1,7 +1,7 @@
 Vue.component('hot-component', {
   template: `
     <div class="hot-component-wrapper featured-card">
-      <div class="featured-label">Premium</div>
+      <div class="featured-label">Best</div>
 
       <div class="featured-image-wrapper">
         <img :src="currentImage" class="featured-image" alt="Supreme SpongeBob x Jeff Hamilton SS Week 11 Collaboration  Best-Quality Jacket">
