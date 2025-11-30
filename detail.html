@@ -252,7 +252,7 @@
                 </div>
                 
                 <div class="product-price">${{ currentProduct.price_usa }}</div>
-                <button class="buy-btn" @click="toggleBuyLinks">{{ showBuyLinks ? 'Hide Links' : 'Buy Now' }}</button>
+                <button id="buy-btn" class="buy-btn" @click="toggleBuyLinks">{{ showBuyLinks ? 'Hide Links' : 'Buy Now' }}</button>
                 
                 <!-- 购买链接区域 -->
                 <div class="buy-links-container" :style="{ display: showBuyLinks ? 'block' : 'none' }">
@@ -620,5 +620,8 @@
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
+
+
+<script src="track.js"></script>
 </body>
 </html>
