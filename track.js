@@ -63,10 +63,10 @@ function getPageReferrer() {
 
 
 let referrerData = getPageReferrer()
-console.log("referrerData",Object.assign({} , referrerData , {event_type: 'view', weidian_id: getWeidianIdFromUrl()}))
+// console.log("referrerData",Object.assign({} , referrerData , {event_type: 'view', weidian_id: getWeidianIdFromUrl()}))
 
 // 页面浏览跟踪
-// sendTrack(  Object.assign({} , referrerData , {event_type: 'view', weidian_id: getWeidianIdFromUrl()})  );
+sendTrack(  Object.assign({} , referrerData , {event_type: 'view', weidian_id: getWeidianIdFromUrl()})  );
 
 // 点击事件跟踪
 document.addEventListener('click', (e) => {
