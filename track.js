@@ -1,4 +1,3 @@
-console.log("track loaded")
 // 从URL获取weidian_id参数
 const getWeidianIdFromUrl = () => new URLSearchParams(window.location.search).get('weidian_id');
 
@@ -81,4 +80,3 @@ document.addEventListener('click', (e) => {
         sendTrack({ event_type: 'click', weidian_id: getWeidianIdFromUrl() });
     }
 });
-
