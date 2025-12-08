@@ -1,19 +1,29 @@
 Vue.component('social-component', {
   template: `
-    <div class="social-icons">
-      <a href="https://t.me/+zQFcv5JPY-wxZTE1" class="social-icon telegram-icon" target="_blank" title="Join Telegram">
-        <i class="fab fa-telegram-plane"></i>
-      </a>
-      <a href="https://wa.me/8617706270893" class="social-icon whatsapp-icon" target="_blank" title="Join WhatsApp">
-        <i class="fab fa-whatsapp"></i>
-      </a>
-      <a href="https://www.tiktok.com/@qqww3968" class="social-icon tiktok-icon" target="_blank" title="Follow TikTok">
-        <i class="fab fa-tiktok"></i>
-      </a>
-      <button class="social-icon share-icon" @click="sharePage" title="Share this page">
-        <i class="fas fa-share-alt"></i>
-      </button>
+      <div class="social-icons">
+        
+        <a href="https://wa.me/8617706270893" class="social-icon whatsapp-icon" target="_blank" title="Join WhatsApp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+    
+        <a href="https://discord.gg/3xuVTvPN" class="social-icon discord-icon" target="_blank" title="Join Discord">
+          <i class="fab fa-discord"></i>
+        </a>
+        
+        <a href="https://www.tiktok.com/@qqww3968" class="social-icon tiktok-icon" target="_blank" title="Follow TikTok">
+          <i class="fab fa-tiktok"></i>
+        </a>
+        
+        <a href="https://t.me/+zQFcv5JPY-wxZTE1" class="social-icon telegram-icon" target="_blank" title="Join Telegram">
+          <i class="fab fa-telegram-plane"></i>
+        </a>
+
+        <button class="social-icon share-icon" @click="sharePage" title="Share this page">
+          <i class="fas fa-share-alt"></i>
+        </button>
     </div>
+
+
   `,
   
   methods: {
@@ -72,6 +82,7 @@ Vue.component('social-component', {
         .whatsapp-icon { background-color: #25D366; }
         .tiktok-icon { background-color: #000; }
         .share-icon { background-color: #ff6600; }
+        .discord-icon { background-color: #5865F2;}
 
         .social-icon:hover {
           transform: scale(1.1);
