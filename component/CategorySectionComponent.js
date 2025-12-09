@@ -63,15 +63,19 @@ Vue.component('category-section-component', {
   computed:{
     categoryDataLink(){
         if( !this.cnfansref) 
+        {
+            this.categoryData.plist.forEach( item=>{
+                item.href = `./detail.html?weidian_id=${item.weidian_id}`
+            } )
             return this.categoryData
+        }
         else
         {
             this.categoryData.plist.forEach( item=>{
                 item.href = `./detail.html?weidian_id=${item.weidian_id}&cnfansref=${this.cnfansref}`
             } )
+            return this.categoryData
         }
-        console.info("3435categoryData" , this.categoryData)
-        return this.categoryData
     }
   },
   data(){
