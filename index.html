@@ -68,7 +68,7 @@
 <body>
   <div id="app">
     <!-- 使用导航组件 -->
-    <nav-component></nav-component>
+    <nav-component ></nav-component>
     
     <!-- 分类组件 -->
     <category-component 
@@ -98,7 +98,10 @@
       
       <!-- 每个分类自己的分页按钮 - 使用原来的a标签 -->
       <div class="pagination-buttons" v-if="!categorySection.loading">
-        <a :href="'./all.html?categoryId=' + categorySection.categoryId + '&categoryName=' + categorySection.category" class="fancy-button">
+        <!-- <a :href="'./all.html?categoryId=' + categorySection.categoryId + '&categoryName=' + categorySection.category" class="fancy-button">
+          View More<span class="arrow">→</span>
+        </a> -->
+        <a :href="categorySection.href" class="fancy-button">
           View More<span class="arrow">→</span>
         </a>
       </div>
@@ -123,6 +126,7 @@
    var app = new Vue({
   el: '#app',
   data: {
+    cnfansref:"", //cnfans推广码
     // 分类组件的数据
     categoryData: {
       categories: [],
@@ -153,6 +157,8 @@
         
         if (result.code === 200) {
           this.categoryData.categories = result.data || [];
+
+          console.log('分类加载成功，数量:', this.categoryData.categories);
           console.log('分类加载成功，数量:', this.categoryData.categories.length);
           // 分类加载成功后初始化商品数据结构
           this.initProductSections();
@@ -170,25 +176,45 @@
     // 初始化商品数据结构
     initProductSections() {
       console.log('初始化商品数据结构...');
-      
+      const urlParams = new URLSearchParams(window.location.search);
+      let cnfansref = urlParams.get('cnfansref');
       // 创建所有分类的数据结构
-      this.categorySectionData = this.categoryData.categories.map(category => ({
-        categoryId: category.id,
-        category: category.name,
-        plist: [], // 初始为空数组
-        loading: false,
-        loaded: false,
-        error: null,
-        // 新增分页相关字段
-        pagination: {
-          page: 1,
-          total: 0,
-          totalPages: 0
-        },
-        hasMore: false
-      }));
+      if( !cnfansref )
+        this.categorySectionData = this.categoryData.categories.map(category => ({
+          categoryId: category.id,
+          category: category.name,
+          plist: [], // 初始为空数组
+          loading: false,
+          loaded: false,
+          error: null,
+          // 新增分页相关字段
+          pagination: {
+            page: 1,
+            total: 0,
+            totalPages: 0
+          },
+          hasMore: false
+        }));
+      else
+        this.categorySectionData = this.categoryData.categories.map(category => ({
+          categoryId: category.id,
+          category: category.name,
+          plist: [], // 初始为空数组
+          loading: false,
+          loaded: false,
+          error: null,
+          // 新增分页相关字段
+          pagination: {
+            page: 1,
+            total: 0,
+            totalPages: 0
+          },
+          hasMore: false,
+          href:`./all.html?categoryId=${category.id}&categoryName=${category.name}&cnfansref=${cnfansref}`
+        }));
       
-      console.log('初始化完成，分类数量:', this.categorySectionData.length);
+      console.error('初始化完成，分类数量:', this.categorySectionData);
+      // console.log('初始化完成，分类数量:', this.categorySectionData.length);
       
       // 立即加载前2个分类
       this.loadInitialSections();
@@ -356,8 +382,14 @@
     }
   },
   mounted() {
+    
+
+    const urlParams = new URLSearchParams(window.location.search);
+    this.cnfansref = urlParams.get('cnfansref');
+
     console.log('父组件已挂载');
     this.initData();
+
   },
   beforeDestroy() {
     // 清理观察器

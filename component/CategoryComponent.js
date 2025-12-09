@@ -14,10 +14,10 @@ Vue.component('category-component', {
       <!-- 正常状态 -->
       <div 
         v-else
-        v-for="category in categories" 
+        v-for="category in categoriesLink" 
         :key="category.id" 
         class="category-card"
-        @click="navigateToCategory(category.id, category.name)"
+        @click="navigateToCategory(category.href)"
       >
         <div class="category-icon">{{ category.icon_unicode || '📁' }}</div>
         <div class="category-name">{{ category.name }}</div>
@@ -38,21 +38,44 @@ Vue.component('category-component', {
       default: null
     }
   },
+  data(){
+    return {
+      cnfansref:""
+    }
+  },
+  computed:{
+    
+
+      categoriesLink(){
+        
+        this.categories.forEach(item=>{
+            if (this.cnfansref)
+            {
+              item.href = `./all.html?categoryId=${item.id}&categoryName=${encodeURIComponent(item.name)}&cnfansref=${this.cnfansref}`
+                console.log(item.href)
+            }
+            else  
+              item.href = `./all.html?categoryId=${item.id}&categoryName=${encodeURIComponent(item.name)}`
+        })
+        
+        return this.categories
+        
+      }
+  },
   mounted() {
+
+    const urlParams = new URLSearchParams(window.location.search);
+    this.cnfansref = urlParams.get('cnfansref');
+
+
     console.log('CategoryComponent 已挂载');
     this.injectStyles();
   },
   methods: {
     // 跳转到分类页面
-    navigateToCategory(categoryId, categoryName) {
-      console.log(`跳转到分类 ${categoryId}`);
-      if (categoryId && !isNaN(categoryId)) {
-        const url = `./all.html?categoryId=${categoryId}&categoryName=${categoryName}`;
-        console.log(`跳转URL: ${url}`);
-        window.location.href = url;
-      } else {
-        console.error('无效的分类ID:', categoryId);
-      }
+    navigateToCategory(href ) {
+      window.location.href = href;
+      
     },
     
     injectStyles() {

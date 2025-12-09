@@ -26,12 +26,13 @@ Vue.component('hot-component', {
       <div class="featured-info">
         <div class="featured-title">Supreme SpongeBob x Jeff Hamilton SS Week 11 Collaboration  Best-Quality Jacket</div>
         <div class="featured-price">$97.8</div>
-        <a href="./detail.html?weidian_id=7615692677" class="featured-button">View Details</a>
+        <a :href="href" class="featured-button">View Details</a>
       </div>
     </div>
   `,
   data() {
     return {
+      cnfansref:"",
       colors: [
         { name: 'White', url: 'https://si.geilicdn.com/pcitem901979398095-48600000019ab9c2990f0a8133cc_1263_1028.jpg.webp?w=640&h=640' },
         { name: 'Black', url: 'https://si.geilicdn.com/pcitem901979398095-48930000019ab9c297710a23041a_1215_1000.jpg.webp?w=640&h=640' }
@@ -43,6 +44,11 @@ Vue.component('hot-component', {
     currentImage() {
       const colorObj = this.colors.find(c => c.name === this.selectedColor);
       return colorObj ? colorObj.url : this.colors[0].url;
+    },
+    href(){
+      if(this.cnfansref)
+        return `./detail.html?weidian_id=7615692677&cnfansref=${this.cnfansref}`
+      return "./detail.html?weidian_id=7615692677"
     }
   },
   methods: {
@@ -170,6 +176,8 @@ Vue.component('hot-component', {
     }
   },
   mounted() {
+    const urlParams = new URLSearchParams(window.location.search);
+    this.cnfansref = urlParams.get('cnfansref');
     this.injectStyles();
   }
 });

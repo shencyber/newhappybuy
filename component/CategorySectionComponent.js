@@ -2,10 +2,10 @@
 Vue.component('category-section-component', {
   template: `
     <div class="category-section">
-      <!-- <h2 class="category-title">{{categoryData.category}}</h2> -->
+      <!-- <h2 class="category-title">{{categoryDataLink.category}}</h2> -->
       <div class="product-container">
         <div class="product-inner">
-          <div v-for="product in categoryData.plist" :key="product.id" class="product-card">
+          <div v-for="product in categoryDataLink.plist" :key="product.id" class="product-card">
             <!-- 商品图片区域 -->
             <div class="product-image-wrapper">
               <img :src="getCurrentImage(product)" 
@@ -45,7 +45,7 @@ Vue.component('category-section-component', {
             <div class="product-price">{{'$'+ product.price_usa }}</div>
 
             <!-- 详情页按钮 - 使用纯链接，不添加任何事件监听 -->
-            <a :href="'./detail.html?weidian_id=' + product.weidian_id" 
+            <a :href="product.href"
                class="detail-button">
               View Details
             </a>
@@ -60,7 +60,30 @@ Vue.component('category-section-component', {
       required: true
     }
   },
+  computed:{
+    categoryDataLink(){
+        if( !this.cnfansref) 
+            return this.categoryData
+        else
+        {
+            this.categoryData.plist.forEach( item=>{
+                item.href = `./detail.html?weidian_id=${item.weidian_id}&cnfansref=${this.cnfansref}`
+            } )
+        }
+        console.info("3435categoryData" , this.categoryData)
+        return this.categoryData
+    }
+  },
+  data(){
+    return {
+      cnfansref:""
+    }
+  },
   mounted() {
+    const urlParams = new URLSearchParams(window.location.search);
+    this.cnfansref = urlParams.get('cnfansref');
+
+
     this.injectStyles();
     console.log("this.categoryData", this.categoryData);
     

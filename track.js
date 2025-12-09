@@ -65,14 +65,22 @@ function getPageReferrer() {
 let referrerData = getPageReferrer()
 // console.log("referrerData",Object.assign({} , referrerData , {event_type: 'view', weidian_id: getWeidianIdFromUrl()}))
 
+
+const urlParams = new URLSearchParams(window.location.search);
+let cnfansref = urlParams.get('cnfansref');
 // 页面浏览跟踪
 if(window.location.href=='https://newhappybuy.store/' )
 {
-  console.log( Object.assign({} , referrerData , {event_type: 'view'}) )
-  sendTrack(  Object.assign({} , referrerData , {event_type: 'view'})  );
+
+  
+  console.error( "track" , cnfansref )
+  sendTrack(  Object.assign({} , referrerData , {event_type: 'view' , cnfansref:cnfansref})  );
 }
 else
-  sendTrack(  Object.assign({} , referrerData , {event_type: 'view', weidian_id: getWeidianIdFromUrl()})  );
+{
+ 
+  sendTrack(  Object.assign({} , referrerData , {event_type: 'view', weidian_id: getWeidianIdFromUrl(),cnfansref:cnfansref})  );
+}
 
 // 点击事件跟踪
 document.addEventListener('click', (e) => {

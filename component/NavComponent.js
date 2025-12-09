@@ -5,17 +5,17 @@ Vue.component('nav-component', {
       <!-- 桌面端导航（PC端） -->
       <div class="nav-container-desktop">
         <!-- 首页 -->
-        <a :class="['nav-link', isActive('./index.html') ? 'nav-link-active' : '']" href="./index.html">
+        <a :class="['nav-link', isActive('./index.html') ? 'nav-link-active' : '']" :href="indexLink">
           <i class="fas fa-home nav-icon"></i>
           Home
         </a>
         
         <!-- 分类链接 -->
         <a 
-          v-for="category in categories" 
+          v-for="category in categoriesLink" 
           :key="category.id"
           :class="['nav-link', isActive('./all.html?categoryId=' + category.id) ? 'nav-link-active' : '']" 
-          :href="'./all.html?categoryId=' + category.id + '&categoryName=' + encodeURIComponent(category.name)"
+          :href="category.href"
         >
           <span class="nav-icon-unicode">{{ category.icon_unicode }}</span>
           {{ category.name }}
@@ -36,9 +36,10 @@ Vue.component('nav-component', {
           
           <!-- 分类链接 -->
           <a 
-            v-for="category in categories" 
+            v-for="category in categoriesLink" 
             :key="category.id"
-            :href="'./all.html?categoryId=' + category.id + '&categoryName=' + encodeURIComponent(category.name)"
+            
+            :href="category.href"
             class="mobile-link" 
             :class="{ active: isActive('./all.html?categoryId=' + category.id) }"
           >
@@ -54,8 +55,33 @@ Vue.component('nav-component', {
       isMenuOpen: false,
       categories: [], // 存储分类数据
       loading: false,
-      error: null
+      error: null,
+      cnfansref:""
     };
+  },
+  
+  computed:{
+    indexLink() {
+        return this.cnfansref
+          ? `./index.html?cnfansref=${this.cnfansref}`
+          : './index.html';
+      },
+
+      categoriesLink(){
+        
+        this.categories.forEach(item=>{
+            if (this.cnfansref)
+            {
+              item.href = `./all.html?categoryId=${item.id}&categoryName=${encodeURIComponent(item.name)}&cnfansref=${this.cnfansref}`
+                console.log(item.href)
+            }
+            else  
+              item.href = `./all.html?categoryId=${item.id}&categoryName=${encodeURIComponent(item.name)}`
+        })
+        
+        return this.categories
+        
+      }
   },
   methods: {
     // 加载分类数据
@@ -71,6 +97,22 @@ Vue.component('nav-component', {
           this.categories = result.data || [];
           console.log('导航组件分类加载成功，数量:', this.categories.length);
           console.log('分类数据详情:', this.categories);
+
+
+          // const cnfansref = localStorage.getItem("cnfansref")
+          // console.log("cnfansref",cnfansref)
+          // this.categories.forEach(item=>{
+          //   if (cnfansref)
+          //   {
+          //     item.href = `./all.html?categoryId=${item.id}&categoryName=${encodeURIComponent(item.name)}&cnfansref=${cnfansref}`
+          //       console.log(item.href)
+          //   }
+          //   else  
+          //     item.href = `./all.html?categoryId=${item.id}&categoryName=${encodeURIComponent(item.name)}`
+          // })
+
+          // console.log("this.categories11",this.categories)
+
         } else {
           this.error = result.msg || '获取分类列表失败';
           console.error('导航组件加载分类失败:', this.error);
@@ -320,6 +362,9 @@ Vue.component('nav-component', {
       `;
       document.head.appendChild(style);
     }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    this.cnfansref = urlParams.get('cnfansref');
 
     // 加载分类数据
     this.loadCategories();
