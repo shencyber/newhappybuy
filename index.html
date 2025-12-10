@@ -193,7 +193,8 @@
             total: 0,
             totalPages: 0
           },
-          hasMore: false
+          hasMore: false,
+          href:`./all.html?categoryId=${category.id}&categoryName=${category.name}`
         }));
       else
         this.categorySectionData = this.categoryData.categories.map(category => ({
