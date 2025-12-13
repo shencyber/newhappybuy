@@ -84,8 +84,38 @@
     </div>
 
 
-    <hot-component></hot-component>
+    <featured-component 
+        type="hot"
+        title="ARCTERYX Macai 3-in-1 Unisex Down Jacket"
+        price="121.20"  
+        weidian-id="7570753893"
+        :colors="[
+            { name: 'Malachite blue', url: 'https://si.geilicdn.com/pcitem901979398095-51c900000199de1ee8c20a21146b-unadjust_1080_1080.png' },
+                { name: 'black', url: 'https://si.geilicdn.com/pcitem901979398095-0d8800000199de1e26c50a207569-unadjust_1080_1080.png' },
+                { name: 'dark grey', url: 'https://si.geilicdn.com/pcitem901979398095-09fc00000199de1e6a0a0a23057e-unadjust_1080_1080.png' },
+                { name: 'straminar blue', url: 'https://si.geilicdn.com/pcitem901979398095-0ae300000199de1eaa9b0a23037f-unadjust_1080_1080.png' },
+                { name: 'straminar blue', url: 'https://si.geilicdn.com/pcitem901979398095-0ae300000199de1eaa9b0a23037f-unadjust_1080_1080.png' },
+                { name: 'Retro green', url: 'https://si.geilicdn.com/pcitem901979398095-2f6e00000199de1f21910a2103bd-unadjust_1080_1080.png' },
+                { name: 'brown', url: 'https://si.geilicdn.com/pcitem901979398095-5b2600000199de1f60f70a811411-unadjust_1080_1080.png' },
+                { name: 'navy blue', url: 'https://si.geilicdn.com/pcitem901979398095-0e6000000199de1fadd70a81347d-unadjust_1080_1080.png' }
+        ]"
+        selected-color="Malachite blue"
+    ></featured-component>
 
+
+    <featured-component 
+        type="best"
+        title="Supreme SpongeBob x Jeff Hamilton SS Week 11 Collaboration  Best-Quality Jacket"
+        price="97.8"  
+        weidian-id="7615692677"
+        :colors="[
+            { name: 'White', url: 'https://si.geilicdn.com/pcitem901979398095-48600000019ab9c2990f0a8133cc_1263_1028.jpg.webp?w=640&h=640' },
+            { name: 'Black', url: 'https://si.geilicdn.com/pcitem901979398095-48930000019ab9c297710a23041a_1215_1000.jpg.webp?w=640&h=640' }
+        ]"
+        selected-color="White"
+    ></featured-component>
+
+    
 
 
     <!-- 循环渲染每个分类的商品展示组件和分页按钮 -->
@@ -120,7 +150,8 @@
   <script src="./component/CategoryComponent.js"></script>
   <script src="./component/CategorySectionComponent.js"></script>
   <script src="./component/SocialComponent.js"></script>
-  <script src="./component/HotComponent.js"></script>
+  <script src="./component/FeaturedComponent.js"></script>
+  <!-- <script src="./component/BestComponent.js"></script> -->
     
   <script>
    var app = new Vue({
