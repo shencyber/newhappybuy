@@ -152,6 +152,8 @@
       },
       methods: {
         async loadBrands() {
+
+          console.log("kasihi loadBrands")
           try {
             const res = await categoryApi.getCategoryBrands(this.currentCategoryId);
             if (res.code === 200) this.brands = res.data.brands || [];
@@ -161,6 +163,10 @@
           }
         },
         async loadCategoryProducts() {
+
+          console.log("kasihi loadCategoryProducts")
+
+          
           const sec = this.categorySection;
           if (sec.loading) return;
           sec.loading = true;
@@ -201,6 +207,8 @@
         initFromUrl() {
           const p = new URLSearchParams(location.search);
           this.currentCategoryId = parseInt(p.get('categoryId')) || 0;
+          console.log("currentCategoryId")
+          console.log(this.currentCategoryId)
           this.currentCategoryName = p.get('categoryName') || '';
           this.categorySection.categoryId = this.currentCategoryId;
           this.categorySection.category = this.currentCategoryName;
@@ -209,6 +217,7 @@
       mounted() {
         this.initFromUrl();
         if (this.currentCategoryId) {
+          console.log("分类id拿到了")
           this.loadBrands();
           this.loadCategoryProducts();
         }
