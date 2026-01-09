@@ -206,6 +206,7 @@
         },
         initFromUrl() {
           const p = new URLSearchParams(location.search);
+          console.log( p )
           this.currentCategoryId = parseInt(p.get('categoryId')) || 0;
           console.log("currentCategoryId")
           console.log(this.currentCategoryId)
@@ -231,4 +232,5 @@
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
 </body>
+
 </html>
