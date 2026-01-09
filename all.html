@@ -205,7 +205,7 @@
           this.loadCategoryProducts();
         },
         initFromUrl() {
-          console.log( "search" ,  location)
+          console.log( "search" ,  location.search)
           const p = new URLSearchParams(location.search);
           console.log( "ppp" ,  p )
           this.currentCategoryId = parseInt(p.get('categoryId')) || 0;
@@ -235,5 +235,6 @@
 </body>
 
 </html>
+
 
 
