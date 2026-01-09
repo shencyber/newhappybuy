@@ -252,8 +252,17 @@
                 </div>
                 
                 <div class="product-price">${{ currentProduct.price_usa }}</div>
-                <button id="buy-btn" class="buy-btn" @click="toggleBuyLinks">{{ showBuyLinks ? 'Hide Links' : 'Buy Now' }}</button>
+                <!-- <button id="buy-btn" class="buy-btn" @click="toggleBuyLinks">{{ showBuyLinks ? 'Hide Links' : 'Buy Now' }}</button> -->
                 
+                <!-- <button class="buy-btn"> -->
+                <p style="display:flex;align-items: center;">
+                    <i class="fab fa-whatsapp social-icon whatsapp-icon"></i>
+                    <a style="margin-left:10px;" href="https://api.whatsapp.com/send?phone=8617706270893&text=Hi, saw it on your site"  target="_blank" title="Join WhatsApp">WhatsApp me</a>
+
+
+                </p>
+                <!-- </button> -->
+
                 <!-- 购买链接区域 -->
                 <div class="buy-links-container" :style="{ display: showBuyLinks ? 'block' : 'none' }">
                     <div class="buy-links-title">Select Purchase Platform:</div>
@@ -309,7 +318,7 @@
                 currentProduct: null,
                 currentProductImages: [],
                 currentMainIndex: 0,
-                showBuyLinks: false,
+                showBuyLinks: true,
                 showModal: false,
                 modalImageIndex: 0
             },
