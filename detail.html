@@ -48,14 +48,22 @@
         }
 
         .close {
-            position: absolute;
-            top: -40px;
-            right: 0;
+            position: fixed;  /* 改为fixed定位，相对于视口 */
+            top: 20px;
+            right: 20px;
             color: #fff;
             font-size: 40px;
             font-weight: bold;
             cursor: pointer;
-            z-index: 1001;
+            z-index: 1100;    /* 提高层级，确保在最上层 */
+            background: rgba(0, 0, 0, 0.5);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
         }
 
         .close:hover {
@@ -117,6 +125,8 @@
                 top: 10px;
                 right: 10px;
                 font-size: 30px;
+                width: 40px;
+                height: 40px;
             }
 
             .prev,
@@ -251,6 +261,27 @@
             }
         }
         /* ==================== SKU模块样式 - 结束 ==================== */
+
+        /* 新增：模态框标题样式 */
+        .modal-title {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 5px 0;
+            z-index: 1002;
+        }
+
+        @media (max-width: 768px) {
+            .modal-title {
+                top: 10px;
+                font-size: 16px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -343,6 +374,7 @@
                                 v-for="(img, imgIndex) in sku.images" 
                                 :key="imgIndex"
                                 class="sku-image-wrapper"
+                                @click="openSkuModal(sku.sku_title, sku.images, imgIndex)"
                             >
                                 <img :src="img.url" :alt="sku.sku_title" loading="lazy" @error="handleImageError">
                             </div>
@@ -356,17 +388,26 @@
         <!-- 社交按钮 -->
         <social-component></social-component>
 
-        <!-- 大图查看模态框 -->
+        <!-- 统一的大图查看模态框 -->
         <div v-if="showModal" class="modal" @click="closeModal">
             <div class="modal-content" @click.stop>
                 <span class="close" @click="closeModal">&times;</span>
+                
+                <!-- 显示当前查看的标题 -->
+                <div class="modal-title" v-if="modalData.title">
+                    {{ modalData.title }}
+                </div>
+                
+                <!-- 统一的图片显示 -->
                 <img 
-                    :src="getImageUrl(currentProductImages[modalImageIndex]?.url)" 
-                    :alt="currentProduct.title"
+                    :src="modalCurrentImage" 
+                    :alt="modalData.title"
                     @error="handleImageError"
                 >
-                <button v-if="currentProductImages.length > 1" class="prev" @click="prevModal">&lt;</button>
-                <button v-if="currentProductImages.length > 1" class="next" @click="nextModal">&gt;</button>
+                
+                <!-- 导航按钮 -->
+                <button v-if="modalData.images.length > 1" class="prev" @click="prevModal">&lt;</button>
+                <button v-if="modalData.images.length > 1" class="next" @click="nextModal">&gt;</button>
             </div>
         </div>
     </div>
@@ -390,7 +431,22 @@
                 currentMainIndex: 0,
                 showBuyLinks: true,
                 showModal: false,
-                modalImageIndex: 0
+                // 统一模态框数据
+                modalData: {
+                    images: [],     // 当前查看的图片数组
+                    title: '',      // 当前查看的标题
+                    index: 0        // 当前查看的索引
+                }
+            },
+            computed: {
+                // 当前模态框显示的图片URL
+                modalCurrentImage() {
+                    const img = this.modalData.images[this.modalData.index];
+                    if (!img) return '';
+                    
+                    // 处理URL中的反斜杠
+                    return img.url ? img.url.replace(/\\/g, '') : '';
+                }
             },
             methods: {
                 // 从URL获取weidian_id参数
@@ -450,9 +506,6 @@
 
                 // 图片加载错误处理
                 handleImageError(event) {
-
-                    console.log(  event)
-                     // 直接替换为SVG，不进行网络请求
                     const svg = `
                         <svg width="${event.target.width || 100}" height="${event.target.height || 100}" 
                              xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
@@ -465,25 +518,7 @@
                     `;
                     
                     event.target.src = 'data:image/svg+xml;base64,' + btoa(svg);
-
-
-                    // console.error('图片加载失败:', event.target.src);
-                    // // 可以设置默认图片
-                    // event.target.src = './images/default-product.jpg';
                 },
-
-                // ==================== SKU模块方法 - 开始 ====================
-                // 获取SKU图片URL
-                getSkuImageUrl(img) {
-                    if (!img || !img.name) return '';
-                    // 根据source字段判断图片来源
-                    if (img.source === 'r2') {
-                        // r2图片需要拼接完整URL，这里假设你有一个r2的base URL
-                        return `https://your-r2-domain.com/${img.name}`;
-                    }
-                    return img.name;
-                },
-                // ==================== SKU模块方法 - 结束 ====================
 
                 // 格式化卖点，用 • 符号连接
                 formatSellingPoints(sellingPoints) {
@@ -542,34 +577,69 @@
                         ];
                 },
 
-                // 模态框相关方法
+                // ==================== 统一模态框方法 ====================
+                // 打开主图片模态框
                 openModal(index) {
-                    this.modalImageIndex = index;
+                    this.modalData = {
+                        images: this.currentProductImages,
+                        title: this.currentProduct?.title || '',
+                        index: index
+                    };
                     this.showModal = true;
                     document.body.style.overflow = 'hidden';
                 },
 
+                // 打开SKU图片模态框
+                openSkuModal(skuTitle, skuImages, imgIndex) {
+                    // 处理SKU图片URL（去掉反斜杠）
+                    const processedImages = skuImages.map(img => ({
+                        ...img,
+                        url: img.url ? img.url.replace(/\\/g, '') : ''
+                    }));
+                    
+                    this.modalData = {
+                        images: processedImages,
+                        title: skuTitle,
+                        index: imgIndex
+                    };
+                    this.showModal = true;
+                    document.body.style.overflow = 'hidden';
+                },
+
+                // 统一的前一张图片方法
+                prevModal() {
+                    if (this.modalData.images.length <= 1) return;
+                    
+                    if (this.modalData.index > 0) {
+                        this.modalData.index--;
+                    } else {
+                        this.modalData.index = this.modalData.images.length - 1;
+                    }
+                },
+
+                // 统一的后一张图片方法
+                nextModal() {
+                    if (this.modalData.images.length <= 1) return;
+                    
+                    if (this.modalData.index < this.modalData.images.length - 1) {
+                        this.modalData.index++;
+                    } else {
+                        this.modalData.index = 0;
+                    }
+                },
+
+                // 关闭模态框
                 closeModal() {
                     this.showModal = false;
+                    this.modalData = {
+                        images: [],
+                        title: '',
+                        index: 0
+                    };
                     document.body.style.overflow = 'auto';
                 },
 
-                prevModal() {
-                    if (this.modalImageIndex > 0) {
-                        this.modalImageIndex--;
-                    } else {
-                        this.modalImageIndex = this.currentProductImages.length - 1;
-                    }
-                },
-
-                nextModal() {
-                    if (this.modalImageIndex < this.currentProductImages.length - 1) {
-                        this.modalImageIndex++;
-                    } else {
-                        this.modalImageIndex = 0;
-                    }
-                },
-
+                // ==================== 其他方法 ====================
                 initMobileAndAllImages() {
                     // 添加安全检查
                     const mobileSlides = document.getElementById('mobileSlides');
@@ -598,7 +668,7 @@
 
                         const slideImg = document.createElement('img');
                         slideImg.src = this.getImageUrl(img.url);
-                        slideImg.alt = `image  ${index + 1}`;
+                        slideImg.alt = `image ${index + 1}`;
                         slideImg.loading = 'lazy';
                         slideImg.addEventListener('click', (e) => {
                             e.stopPropagation();
@@ -741,14 +811,10 @@
     </script>
 <script src="./track.js"></script>
     <script>
-  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-  window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
-</script>
-<script defer src="/_vercel/insights/script.js"></script>
-<script defer src="/_vercel/speed-insights/script.js"></script>
-
-  
-
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+        window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+    <script defer src="/_vercel/speed-insights/script.js"></script>
 </body>
-
 </html>
