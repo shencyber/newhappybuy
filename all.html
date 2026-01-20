@@ -42,6 +42,7 @@
 
     <!-- 分页按钮 -->
     <div class="pagination-buttons" v-if="!categorySection.loading">
+
       <button v-if="hasMore" @click="loadCategoryProducts" class="fancy-button">Load More</button>
       <div v-else class="end-message">All products loaded</div>
     </div>
@@ -147,7 +148,7 @@
       computed: {
         hasMore() {
           // 当前页码小于总页数，说明还有更多
-          return this.pagination.page < this.pagination.totalPages;
+          return this.pagination.page <= this.pagination.totalPages;
         }
       },
       methods: {
@@ -186,7 +187,7 @@
 
               this.pagination.total = res.data.total || 0;
               this.pagination.totalPages = res.data.total_pages || 0;
-              
+              console.log( "pagination:" , this.pagination )
               // 重要：设置下一页页码
               this.pagination.page = (res.data.page || this.pagination.page) + 1;
               sec.loaded = true;
