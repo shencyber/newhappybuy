@@ -134,9 +134,8 @@
         /* 右侧商品信息 */
         .product-info {
             flex: 1 1 420px;
-            /*padding: 30px 40px;*/
             display: flex;
-            flex-direction: column;'
+            flex-direction: column;
         }
 
         .product-title {
@@ -169,7 +168,7 @@
         /* 购买按钮 - PC端优化 */
         .buy-btn {
             display: inline-block;
-            background: #2d3436;
+            background-color: #f21473; /* 粉色背景 */
             color: #fff;
             text-decoration: none;
             padding: 14px 24px;
@@ -187,7 +186,7 @@
         }
 
         .buy-btn:hover {
-            background: #636e72;
+            background-color: #d01262; /* 悬停时的粉色 */
             transform: scale(1.05);
         }
 
@@ -292,12 +291,8 @@
             object-fit: contain; /* 完整显示图片，允许空白；备选: scale-down (缩小到fit) */
             cursor: pointer;
             transition: transform 0.3s ease, box-shadow 0.3s ease; /* 平滑交互 */
-            /*box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);*/
-            /*border-radius: 8px; /* 轻微圆角，提升视觉（可选） */*/
             display: block; /* 移除img默认间隙 */
         }
-
-       
 
         /* 移动端优化：增大间距和padding，便于触摸 */
         @media (max-width: 768px) {
@@ -392,7 +387,6 @@
                 display: block;
                 position: relative;
                 width: 100%;
-                /*height: 65vh;*/
                 height: 50vh;
                 overflow: hidden;
                 touch-action: pan-y;
@@ -431,7 +425,7 @@
                 width: 8px;
                 height: 8px;
                 border-radius: 50%;
-                 background-color: rgba(169, 169, 169, 0.5); /* #A9A9A9 的半透明灰色 */
+                background-color: rgba(169, 169, 169, 0.5); /* #A9A9A9 的半透明灰色 */
                 transition: background-color 0.3s;
             }
 
@@ -492,13 +486,8 @@
                 gap: 8px;
             }
         }
-        
 
-
-         /*模块：大图查看模态框（图片查看器） - CSS 样式
-         描述：定义模态框的外观、动画和响应式适配*/
-   
-         /* 大图查看模态框样式 */
+        /* 大图查看模态框样式 */
         .modal {
             position: fixed;
             z-index: 1000;
@@ -513,8 +502,6 @@
             align-items: center;
             justify-content: center;
         }
-
-        /* 移除 .modal.show，因为v-if已控制显示；直接用 .modal 的display:flex */
 
         .modal-content {
             position: relative;
@@ -626,5 +613,103 @@
             pointer-events: auto !important;
         }
 
-        
+        /* ==================== 新增：购买模块容器样式 ==================== */
+        /* mobile-cta 样式 */
+        .mobile-cta {
+            display: flex;
+            align-items: center;
+            background: #f8f9fa;
+            padding: 14px;
+            border-radius: 10px;
+            margin: 0;
+            gap: 12px;
+            border: 1px solid #e0e0e0;
+            max-width: 300px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .cta-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .cta-content {
+            flex: 1;
+        }
+
+        .cta-content p {
+            margin: 0 0 6px 0;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .cta-content a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .cta-content a:hover {
+            text-decoration: underline;
+        }
+
+        /* 购买模块容器 */
+        .buy-modules-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 20px 0;
+            width: 100%;
+        }
+
+        /* PC端：两个模块在同一行 */
+        @media (min-width: 769px) {
+            .buy-modules-container {
+                flex-direction: row;
+                align-items: stretch;
+                gap: 20px;
+            }
+            
+            .buy-modules-container > .buy-btn {
+                flex: 1;
+                margin: 0;
+                max-width: none;
+                align-self: stretch;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: auto;
+                min-height: 60px;
+            }
+            
+            .buy-modules-container > .mobile-cta {
+                flex: 1;
+                margin: 0;
+                max-width: none;
+                min-height: 60px;
+            }
+        }
+
+        /* 移动端：保持上下排列，宽度一致 */
+        @media (max-width: 768px) {
+            .buy-modules-container {
+                flex-direction: column;
+                gap: 12px;
+                align-items: center; /* 居中对齐 */
+            }
+            
+            .buy-modules-container > .buy-btn {
+                width: 100%;
+                max-width: 300px; /* 与mobile-cta保持一致 */
+                margin: 0;
+            }
+            
+            .buy-modules-container > .mobile-cta {
+                width: 100%;
+                max-width: 300px; /* 保持原有限制 */
+                margin: 0;
+            }
+        }
     </style>

@@ -9,280 +9,7 @@
     <link rel="stylesheet" href="./style/detail.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <style>
-        /* 大图查看模态框样式 */
-        .modal {
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.9);
-            animation: fadeIn 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
 
-        .modal-content {
-            position: relative;
-            margin: auto;
-            padding: 0;
-            width: 90%;
-            max-width: 1200px;
-            height: 80%;
-            top: 50%;
-            transform: translateY(-50%);
-            text-align: center;
-        }
-
-        .modal img {
-            width: auto;
-            height: 100%;
-            max-width: 100%;
-            object-fit: contain;
-            display: block;
-            margin: 0 auto;
-        }
-
-        .close {
-            position: fixed;  /* 改为fixed定位，相对于视口 */
-            top: 20px;
-            right: 20px;
-            color: #fff;
-            font-size: 40px;
-            font-weight: bold;
-            cursor: pointer;
-            z-index: 1100;    /* 提高层级，确保在最上层 */
-            background: rgba(0, 0, 0, 0.5);
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-        }
-
-        .close:hover {
-            color: #ccc;
-        }
-
-        .prev,
-        .next {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            font-size: 30px;
-            cursor: pointer;
-            border: none;
-            padding: 15px;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1001;
-        }
-
-        .prev {
-            left: 10px;
-        }
-
-        .next {
-            right: 10px;
-        }
-
-        .prev:hover,
-        .next:hover {
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        /* 移动端优化：全屏适配 */
-        @media (max-width: 768px) {
-            .modal-content {
-                width: 100%;
-                height: 100%;
-                padding: 0;
-            }
-
-            .modal img {
-                height: 100vh;
-                width: auto;
-            }
-
-            .close {
-                top: 10px;
-                right: 10px;
-                font-size: 30px;
-                width: 40px;
-                height: 40px;
-            }
-
-            .prev,
-            .next {
-                font-size: 24px;
-                padding: 10px;
-                width: 40px;
-                height: 40px;
-            }
-        }
-
-        /* 确保所有图片可点击：覆盖可能的pointer-events问题 */
-        .main-img,
-        .mobile-slide img,
-        .all-images-container img {
-            cursor: pointer !important;
-            pointer-events: auto !important;
-        }
-
-        /* 移动端Slider - CSS 优化 */
-        @media (max-width: 768px) {
-            .mobile-slides {
-                display: flex;
-                transition: transform 0.2s ease-out;
-                width: 100%;
-                height: 100%;
-                will-change: transform;
-            }
-
-            .mobile-slide {
-                min-width: 100%;
-                flex-shrink: 0;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .mobile-slide img {
-                max-width: 100%;
-                max-height: 100%;
-                object-fit: contain;
-            }
-
-            .mobile-slider {
-                overflow: hidden;
-                touch-action: pan-y;
-                user-select: none;
-            }
-
-            .mobile-indicator {
-                pointer-events: auto;
-            }
-        }
-
-        /* 加载状态样式 */
-        .loading {
-            text-align: center;
-            padding: 50px;
-            color: #666;
-        }
-
-        .error {
-            text-align: center;
-            padding: 50px;
-            color: #ff4444;
-        }
-
-        /* 卖点样式 */
-        .product-selling-points {
-            margin: 15px 0;
-            color: #666;
-            font-size: 14px;
-            line-height: 1.5;
-        }
-
-        /* ==================== SKU模块样式 - 开始 ==================== */
-        .sku-list {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-            margin-top: 30px;
-        }
-
-        .sku-item {
-            border: 1px solid #e8e8e8;
-            border-radius: 8px;
-            padding: 20px;
-            background: #fafafa;
-        }
-
-        .sku-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 16px;
-        }
-
-        .sku-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            gap: 10px;
-        }
-
-        .sku-image-wrapper {
-            position: relative;
-            padding-bottom: 100%;
-            overflow: hidden;
-            border-radius: 6px;
-            background: #f0f0f0;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-
-        .sku-image-wrapper:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-
-        .sku-image-wrapper img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        @media (max-width: 768px) {
-            .sku-gallery {
-                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-                gap: 8px;
-            }
-        }
-        /* ==================== SKU模块样式 - 结束 ==================== */
-
-        /* 新增：模态框标题样式 */
-        .modal-title {
-            position: absolute;
-            top: -40px;
-            left: 0;
-            right: 0;
-            text-align: center;
-            color: white;
-            font-size: 18px;
-            font-weight: bold;
-            padding: 5px 0;
-            z-index: 1002;
-        }
-
-        @media (max-width: 768px) {
-            .modal-title {
-                top: 10px;
-                font-size: 16px;
-            }
-        }
-    </style>
 </head>
 <body>
     <div id="app">
@@ -347,6 +74,23 @@
                     <i class="fab fa-whatsapp social-icon whatsapp-icon"></i>
                     <a style="margin-left:10px;" href="https://api.whatsapp.com/send?phone=8617706270893&text=Hi, saw it on your site"  target="_blank" title="Join WhatsApp">WhatsApp me</a>
                 </p>
+
+
+                <!-- oopbuy 折扣信息 -->
+                <div class="buy-modules-container">
+                    <button id="buy-btn" class="buy-btn" @click="toggleBuyLinks">Buy Now on Oppbuy & Get a Discount</button>
+                    <div class="mobile-cta">
+                        <div class="cta-icon">🚚</div>
+                        <div class="cta-content">
+                            <p><strong>30% shipping discount</strong> on Oppbuy</p>
+                            <a href="https://oopbuy.com/register?inviteCode=0LE8XD7VX" target="_blank">
+                                Get Discount → 
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- oopbuy 折扣信息 -->
+
 
                 <!-- 购买链接区域 -->
                 <div class="buy-links-container" :style="{ display: showBuyLinks ? 'block' : 'none' }">
@@ -541,7 +285,18 @@
                 },
 
                 toggleBuyLinks() {
-                    this.showBuyLinks = !this.showBuyLinks;
+                    // this.showBuyLinks = !this.showBuyLinks;
+
+                    let _links = this.purchaseLinks(this.currentProduct.weidian_id)
+                    console.log( "_links" , _links )
+                    for (let i = 0; i < _links.length; i++) 
+                    {
+                        if (_links[i]['name'] == "oopbuy") 
+                        {
+                            window.open(_links[i]['link'], '_blank');
+                        }
+                    }
+
                 },
 
                 scrollThumbs(direction) {
